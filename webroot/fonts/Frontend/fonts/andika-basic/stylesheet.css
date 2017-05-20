@@ -1,0 +1,49 @@
+
+@font-face {
+     font-family: 'AndikaRegular';
+    src: url('andika-r-webfont.eot');
+    src: url('andika-r-webfont.eot?#iefix') format('embedded-opentype'),
+         url('andika-r-webfont.woff') format('woff'),
+         url('andika-r-webfont.ttf') format('truetype'),
+         url('andika-r-webfont.svg#AndikaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+
+}
+
+
+/*
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('roboto-light.woff2') format('woff2'),
+         url('roboto-light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+*.
+
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url('roboto-regular.woff2') format('woff2'),
+         url('roboto-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'robotothin';
+    src: url('roboto-thin.woff2') format('woff2'),
+         url('roboto-thin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

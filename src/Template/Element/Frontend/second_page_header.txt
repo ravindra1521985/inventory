@@ -1,0 +1,9 @@
+<div class="each-page-title">
+				<img width="1366" height="236" sizes="(max-width: 1366px) 100vw, 1366px" srcset="http://demoitc.com/jains/wp-content/uploads/2017/02/registration-bg.jpg 1366w, http://demoitc.com/jains/wp-content/uploads/2017/02/registration-bg-300x52.jpg 300w, http://demoitc.com/jains/wp-content/uploads/2017/02/registration-bg-768x133.jpg 768w, http://demoitc.com/jains/wp-content/uploads/2017/02/registration-bg-1024x177.jpg 1024w" alt="" class="attachment-full size-full wp-post-image" src="http://demoitc.com/jains/wp-content/uploads/2017/02/registration-bg.jpg">                <div class="pge-title">Login or Register</div>
+                <div class="container">
+                	<div class="breadcrum full flow">
+						<div vocab="https://schema.org/" typeof="BreadcrumbList" class="breadcrumbs">
+							<div id="crumbs"><a href="http://demoitc.com/jains">Home</a> &gt; <span class="current">Login or Register</span></div>                        </div>
+                    </div>
+				</div>
+            </div>

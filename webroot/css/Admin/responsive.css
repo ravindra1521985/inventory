@@ -1,0 +1,171 @@
+
+/* -----------------------------------------------------------------------
+    Responsive
+-------------------------------------------------------------------------- */
+
+input[type='text'],input[type='radio'],input[type='checkbox'],input[type='password'],select{ outline:none;}
+@media only screen and (max-width: 1280px) {
+	
+	
+
+}
+@media only screen and (max-width: 1200px) {
+
+}
+@media only screen and (max-width: 1024px) {
+	
+	.business-body{ margin:0 0; padding:30px 0 20px 0;}
+	.checkbox-inline{ float:left}
+
+}
+
+@media only screen and (max-width: 980px) {
+.form-width.mt-30{ margin:0 0 20px 0;}
+
+.btn-center{width:50%;margin:20px auto;}
+
+.btn1-center{width:80%}
+
+.form-group{width:80%;}
+
+#exampleInputFile{ float:left; width:50%; margin-bottom:5px;}
+
+.input-c{ width:25%;}
+	
+}
+@media only screen and (max-width: 800px) {
+}
+@media only screen and (max-width: 768px) {
+	.mtop1{}
+	
+	.font-small{ font-size:15px;}
+	
+	.seperate-section{ margin:10px 0 0 0; }
+	
+	.txt-rt{ text-align:right; }
+	
+	
+}
+@media only screen and (max-width: 767px) {
+.navbar-nav > li {  width: 100%; float:none;}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {  color: #fff;}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {  color: #fff;}
+.headTextTable {  padding: 5px 14px;}
+.paddLeftZero {padding-left: 16px;}
+.selectBox {width: 100%;}
+.marginLeft20{ margin-left:0px !important;}
+label {margin-bottom: 20px;}
+.paddLeftNone {  padding-left: 15px !important;}
+.paddRightNone {  padding-right: 15px !important;}
+.btn { margin-bottom:20px;margin-top: 20px;}
+.vscrollbar {  margin-bottom: 30px;}
+.navbar-default .navbar-nav > li > a { border:none;}
+
+
+
+
+	.setup-c{ padding:20px 10px;}
+
+.setup-c .setup-colom{ width:33%; margin-right:0;}
+
+.setup-c .setup-txt img{ padding-right:0px;}
+
+.setup-c .setup-txt{ font-size:15px;}
+
+.checkbox-inline{ margin:0 0 5px 0;text-align:center;}
+
+.mt02{ margin-top:10px;}
+
+.form-group{width:75%;}
+
+
+}
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (max-width: 640px) {
+	
+.input-c{ width:40%;}
+
+.textarea-txt{  width:70%;}
+
+}
+@media only screen and (max-width: 480px) {
+.nav > li > a {  padding: 5px 10px;}
+.GreyBox {  width: 100%;}
+.navbar-default .navbar-nav > li > a {  border-left: none;}
+.borderRightWhite {  border-right: medium none;}
+.btn1-center{width:100%; text-align:center}
+.btn-c{ width:auto; margin-right:10px;}
+
+.form-group{width:65%;}
+
+#exampleInputFile{ float:none; width:100%; }
+
+
+}
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 360px) {
+	
+	.btn-center{width:70%;}
+	
+	.setup-c .setup-txt{ font-size:12px; text-align:right;}
+	
+	.setup-c .setup-txt img{ float:left}
+	
+	.setup-c .setup-arrow{ display:none;}
+	
+	.title-icon{ margin:0 0 5px 0 !important; padding:0; float:none; font-size:15px}
+
+.expand-link a{ margin:0 0 0px 4px !important; font-size:15px; float:none; overflow:hidden;padding:0 !important; }
+
+.expand-link.mt-30 {
+    margin-top: 0;
+}
+.mbottom{ margin-bottom:16px;}
+
+.mb01{ margin-bottom:10px}
+
+.seperate-section{font-size:13px; margin-bottom:15px }
+
+.textarea-txt{  width:100%;}
+
+.form-group{width:100%; margin-bottom:10px}
+
+.input-c{ width:45%;}
+
+}
+@media only screen and (max-width: 320px) {
+	
+	
+.checkbox-inline{ font-size:12px;}
+
+}
+
+
+/*************************Responsive by lalit*******************************/
+
+@media only screen and (max-width: 992px) {
+	
+	.label-txt {
+   
+    font-size: 11px;
+ 
+}
+
+.input-md {
+    float: left;
+    width: 56px !important;
+}
+
+.dob {
+
+    font-size: 12px;
+
+    width: 32px;
+}
+
+.nav > li > a {
+    font-size: 13px;
+    padding: 5px;
+}
+}
+
