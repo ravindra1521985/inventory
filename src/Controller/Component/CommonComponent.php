@@ -109,7 +109,7 @@ class CommonComponent extends Component
     public function sendEmail($to=null,$message=null,$subject=null)
    {
 	    $email = new Email('default');
-		$email->from(['singh85.ravindra@gmail.com' => 'Jain'])
+		$email->from(['singh85.ravindra@gmail.com' => 'Inventory'])
         ->to($to)
         ->subject($subject)
        // ->template('fail', 'default')

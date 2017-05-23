@@ -24,7 +24,7 @@
                 <?php } ?>
 
 
-        <?php if($routing_prefix === 'admin' && $controller === 'customer'){ ?>
+        <?php if($routing_prefix === 'admin' && $controller === 'invoice'){ ?>
                     <?php //echo $this->Html->image(ADMIN.'profile-management-icon.jpg',['class'=>'pull-left']); ?>
                     <h1 class="headText">Order Management</h1>
                 <?php } ?>

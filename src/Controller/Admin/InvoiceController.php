@@ -23,6 +23,8 @@ class InvoiceController extends AppController
     { 
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', ['getitem','addinvoice']);
+
+        $this->viewBuilder()->layout('admin');
         
     }
    
@@ -45,6 +47,8 @@ class InvoiceController extends AppController
     {       
       
         $this->loadModel('Invoice');
+
+        $this->set('custlist',$this->Common->getcustomerlist());
 
         if($this->request->is('post'))
         {
@@ -71,6 +75,27 @@ class InvoiceController extends AppController
 
                 }
 
+                if(isset($this->request->data['customer']) && !empty($this->request->data['customer']))
+                {
+
+                    $conditions['customer_id ']=$this->request->data['customer'];
+                }
+
+                if(isset($this->request->data['fromdate']) && !empty($this->request->data['fromdate']))
+                {
+
+                    $formdate=date('Y-m-d', strtotime($this->request->data['fromdate']));
+                    $conditions['date(created_date) >=']=$formdate;
+                }
+                if(isset($this->request->data['todate']) && !empty($this->request->data['todate']))
+                {
+
+                    $todate=date('Y-m-d', strtotime($this->request->data['todate']));
+                    $conditions['date(created_date) <=']=$todate;
+                }
+
+
+
 
 
 
@@ -82,7 +107,7 @@ class InvoiceController extends AppController
            'limit' => 10,
              'conditions' => array('status'=>'1',$conditions),
           //  'contain' => ['Stock','ItemPrice'],
-           'order'=>array('id'=>'ASC'),
+           'order'=>array('id'=>'DESC'),
        );
                 
     $result = $this->paginate('Invoice');
@@ -138,6 +163,12 @@ class InvoiceController extends AppController
                           $cid=$this->request->data['c_id'];
                        }
 
+
+      $saveStatus = 1;
+    $conn = ConnectionManager::get('default');
+    $conn->begin();
+
+
             $string                           =$inv['id']+1;              
             $ids                              = str_pad($string, 6, "0", STR_PAD_LEFT);   
               
@@ -146,8 +177,9 @@ class InvoiceController extends AppController
             $invoice->invoice_code             =            $ids;
             $invoice->customer_id              =            $cid;
             $invoice->total_amount             =            $this->request->data['totalamount'];
-            $invoice->dr_amount                =            $this->request->data['dr_amount'];
-            $invoice->cr_amount                =            $this->request->data['cr_amount'];
+            $invoice->dr_amount                =            $this->request->data['blance_due'];
+            $invoice->cr_amount                =            $this->request->data['cr_blance1'];
+            $invoice->paid_amount              =            $this->request->data['paid_amount'];
             $invoice->created_by               =            $this->request->session()->read('Auth.User.id') ;
             $invoice->created_date             =            date('Y-m-d H:i:s');               
 
@@ -157,6 +189,8 @@ class InvoiceController extends AppController
                                 foreach($this->request->data['product_id'] as $key => $value){
 
                                       if($value!=''){
+
+                                        if($this->request->data['stock_qty'][$key]!=''){
 
                                        $invoicedetailTable        =      TableRegistry::get('InvoiceDetail');
                                        $invoicedetail             =      $invoicedetailTable->newEntity();
@@ -178,8 +212,12 @@ class InvoiceController extends AppController
 
 
                                              }
+                                             else{
+                                               $saveStatus=0;
+                                             }
 
                                          }
+                                       }
 
                                     }
 
@@ -187,14 +225,47 @@ class InvoiceController extends AppController
                                 $data1['id']= $cid;
                                 $data1['modify_date'] = date('Y-m-d H:i:s'); 
                                 $data1['modify_by']   = $this->request->session()->read('Auth.User.id');
-                                $data1['cr_amount']   = $this->request->data['cr_amount'] - $this->request->data['totalamount'];
-                                $data1['dr_amount']  = $this->request->data['dr_amount'] + $this->request->data['totalamount'];                          
+                                $data1['cr_amount']   = $this->request->data['cr_amount'] - $this->request->data['cr_blance1'];
+                               // $data1['dr_amount']  = $this->request->data['dr_amount'] + $this->request->data['blance_due'];  
+                                  $data1['dr_amount']  =  $this->request->data['blance_due'];                        
                                 $this->Common->updatecustomer($data1);
                                 $this->Common->customerlog($data1,'invoice');
 
-                                $this->Flash->success(__("Record Added")); 
-                                return $this->redirect(['action' => 'list']);
+                              /*  $customername=$this->request->data['name'];
+                                $email=$this->request->data['email'];
+                                $detail=$this->request->data['detail'];
+                               $message='New Invoice.<br>
+                               Customer Name :'.$customername.'<br>
+                                Email :'.$email.'<br>
+                                Detail :'.$detail.'<br>
+
+                                ';*/
+
+                              //  $this->Common->sendEmail2('singh85.ravinddra@gmail.com',$invid,'New Invoice')
+
+                                //$this->Flash->success(__("Record Added")); 
+                                //return $this->redirect(['action' => 'list']);
                     }
+                    else{
+                      $saveStatus=0;
+                    }
+
+    if($saveStatus ==1)
+    {
+        $conn->commit();
+        $this->Flash->success(__("Record Added")); 
+      return $this->redirect(['action' => 'list']);
+
+    }
+    else
+    {
+        $conn->rollback(); 
+          $this->Flash->errot(__("Please inter valid data")); 
+      return $this->redirect(['action' => 'list']);        
+
+    }
+
+
                   
                 }
 

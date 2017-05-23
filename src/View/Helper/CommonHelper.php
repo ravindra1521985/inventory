@@ -37,19 +37,7 @@ class CommonHelper extends Helper
    
    
 
-   public function getlevel($id=null){
-
-    $level = TableRegistry::get('Level');
-   
-				$con['id'] = $id;  
-              $levelinfo = $level->find()
-				->select(['level_name'])
-                ->where($con)
-                ->first();
-
-  return $levelinfo['level_name'];
-
-}
+  
 
  public function getlastlogindetail($id=null){
 
@@ -98,69 +86,9 @@ public function getdetail($string=null)
  
     }
 	
-public function getquestion_option($id=null){
 
-    $questionoptiontable = TableRegistry::get('QuestionOptions');
-   
-				$con['questions_id'] = $id;  
-                $questionoption = $questionoptiontable->find()
-				//->select(['level_name'])
-                ->where($con)
-                ->toArray();
 
-  return $questionoption;
 
-}
-
-public function action_name($actionname=null){
-	if($actionname=='myaccount'){
-		return 'My Profile'; 
-	}
-	
-	if($actionname=='course'){
-		return 'Course'; 
-	}
-	
-	if($actionname=='lesson'){
-		return 'lesson'; 
-	}
-	if($actionname=='editProfile'){
-		return 'Edit Profile'; 
-	}
-	if($actionname=='viewmark'){
-		return 'View Mark'; 
-	}
-	if($actionname=='viewResult'){
-		return 'View Result'; 
-	}
-	
-	if($actionname=='answers'){
-		return 'Answers'; 
-	}
-	if($actionname=='test'){
-		return 'Test'; 
-	}
-	if($actionname=='thankyou'){
-		return 'Thank You'; 
-	}
-	
-}
-
-public function getquestiondetail($id=null){
-	
-	
-	$this->loadModel('Questions');	
-
-		$questionoptiontable = TableRegistry::get('Questions');	
-		$question=$questionoptiontable->find()
-		->where(['Questions.id'=>$id])
-		->contain(['QuestionOptions'])		
-		->toArray();
-		
-				
-		return $question;
-	
-}
 
 /* fectch data from user log */
    function getuserlog($user_type=null,$user_id=null)
@@ -186,6 +114,37 @@ public function getquestiondetail($id=null){
                  return $data;
     }
 
+
+ public function getRecord($table,$conditio1,$condition2)
+    {
+      if($condition2=='' && $condition2==0)
+      {
+         return 0;
+      }
+        $datay = TableRegistry::get($table);
+        $queryy = $datay->find()        
+         ->where([$conditio1 => $condition2])
+         ->first();      
+     //foreach ($queryy as $roww)
+              //     {
+                   // $typelist = $roww->$field;
+                 // }
+               return $queryy;
+ 
+    }
+
+
+     public function getitemrecord()
+    {
+       
+        $item = TableRegistry::get('Items');
+        $query = $item->find()
+            ->where(['status'=>1])
+            ->order(['name'=>'ASC'])
+            ->toArray();
+            
+       return $query;
+    }
 
  
 }

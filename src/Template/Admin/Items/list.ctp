@@ -20,7 +20,7 @@
                           </div>
                           <div id="no-more-tables">
 						  <div style="padding-bottom:20px;">
-
+                <div style="overflow:scroll;height:auto;width:100%;overflow:auto">
                 <div  class="newbuttton">
               <a href="<?php echo SITEURL; ?>admin/items/downloadexcel">Download</a>
               </div>
@@ -43,7 +43,7 @@
                 <br>
 							  <br>
                
-                              <table class="col-md-12 table-bordered table-striped table-condensed cf paddLeftZero " id="filter">
+                              <table class="col-md-12 table-bordered table-striped table-condensed cf paddLeftZero " id="filter" width="800">
                               <thead class="cf">
                                 <tr class="myHead">
                                   <th>Sr.no. <span><i class="fa fa-sort"></i></span> </th>
@@ -93,9 +93,10 @@
               <div id="pagingDiv"style="margin-left: 20px;">
         <?php echo $this->element(ADMIN.'paging'); ?>
     </div>
-
+ </div>
 
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>

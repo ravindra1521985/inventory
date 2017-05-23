@@ -19,11 +19,11 @@ $cakeDescription = 'Inventory';
 
    <?= $this->Html->css([ADMIN.'bootstrap', ADMIN.'responsive', ADMIN.'style.css', ADMIN.'datepicker.min.css',ADMIN.'global.css']);?>
     <?=$this->Html->script(ADMIN.'jquery-2.1.1');?>
-    <?=$this->Html->script(ADMIN.'bootstrap');?>
-      
+    <?=$this->Html->script(ADMIN.'bootstrap');?>      
     <?=$this->Html->script(ADMIN.'script');?>
     <?=$this->Html->script(ADMIN.'admin');?>
     <?=$this->Html->script(ADMIN.'global');?>
+    <?=$this->Html->script(ADMIN.'bootstrap-datepicker.min');?>
     
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

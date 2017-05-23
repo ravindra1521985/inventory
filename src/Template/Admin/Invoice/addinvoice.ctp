@@ -2,7 +2,7 @@
     <div class="content">
       <div class="row1">
       
-      <div class="col-md-10 col-sm-9">
+      <div class="col-md-11 col-sm-10">
            
           <div class="block-1 block-2">
             <h1 class="GreyBox width100per">Add Invoice</h1>
@@ -13,7 +13,7 @@
                   <?php //print_r($custlist); ?>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Customer Name</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Customer Name  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('name', array('class'=>'form-control','maxlength'=>100,'placeholder'=>'Enter Name','id'=>'customer','list'=>'customer1','required','autocomplete'=>'off'));
                       ?>
@@ -33,7 +33,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Customer Phone</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Customer Phone <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('phone', array('class'=>'form-control numberp','maxlength'=>10,'placeholder'=>'Enter Phone','id'=>'phone','required')); ?>
                        <?php echo $this->Form->error('phone'); ?>
@@ -42,7 +42,7 @@
                 </div>
 				   <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Customer email</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Customer email  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('email', array('class'=>'form-control ','maxlength'=>200,'placeholder'=>'Enter email','id'=>'email','required','type'=>'email', 'pattern'=>'[^ @]*@[^ @]*')); ?>
                        <?php echo $this->Form->error('email'); ?>
@@ -51,7 +51,7 @@
                 </div>
 				   <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Cr.Amount</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Cr.Amount  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('cr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'cr_amount','required')); ?>
                        <?php echo $this->Form->error('cr_amount'); ?>
@@ -61,7 +61,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Dr.Amount</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Dr.Amount  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('dr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'dr_amount','required')); ?>
                        <?php echo $this->Form->error('dr_amount'); ?>
@@ -71,7 +71,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Customer detail</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Customer detail  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('detail', array('class'=>'form-control','maxlength'=>100,'placeholder'=>'Enter detail','id'=>'detail','type'=>'textarea')); ?>
                        <?php echo $this->Form->error('detail'); ?>
@@ -111,9 +111,9 @@
                        <th width="1"></th>
                                             <th>Item name</th>
                                             <th width="20%">Item Code </th>
-                                            <th width="10%">Rate</th>                                        
-                                            <th width="6%">QTY</th>
-                                            <th width="6%">Stock</th>
+                                            <th width="15%">Rate</th>                                        
+                                            <th width="15%">QTY</th>
+                                            <th width="10%">Stock</th>
                                             <th width="10%">Amount</th>                     
                     
                                         </tr>
@@ -136,21 +136,22 @@
 </tbody>
 <tr>
   <td></td>
-  <td><!--Subsidiary Amount--></td><td><?php //echo $this->Form->input('subamount',array('label'=>false,'escape' =>false,'id'=>"subamount",'type'=>'text','class'=>'form-control')); ?></td>
-                    <td>Total Amount :</td><td><?php echo $this->Form->input('totalamount',array('label'=>false,'escape' =>false,'id'=>"totalamount",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
-                    <td><!--Remaining Amount:--></td><td><?php //echo $this->Form->input('remainingamount',array('label'=>false,'escape' =>false,'id'=>"remainingamount",'type'=>'text','class'=>'form-control')); ?></td>
-                    <td></td>
+   <td></td>
+    <td></td>
+  <td></td><td>Sub Amount :<?php echo $this->Form->input('totalamount',array('label'=>false,'escape' =>false,'id'=>"totalamount",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
+  <td>Paid Amount :<?php echo $this->Form->input('paid_amount',array('label'=>false,'escape' =>false,'id'=>"paid_amount",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
+    </td>
+  <td>Cr.Amout :<?php echo $this->Form->input('cr_blance1',array('label'=>false,'escape' =>false,'id'=>"cr_blance1",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
+      </td>
+  <td>Blance Due:<?php echo $this->Form->input('blance_due',array('label'=>false,'escape' =>false,'id'=>"blance_due",'type'=>'text','class'=>'form-control','readonly'=>'readonly')); ?></td>
+                 
                     </tr>
                     </table>
                     </div>
-                    </div>
-                <br>
-                <br>
+               
                  <br>
                 <br>
-                 <br>
-                <br>
-                <div class="text-center mt-20 mb-10 mb-51" style="margin-right:-10%;padding-top:100px;">
+                <div class="text-center mt-20 mb-10 mb-51" style="margin-right:-10%;padding-top:0px;">
                 
                 <?php echo $this->Form->button('Save',array('type'=>'submit','class'=>'btn btn-default btn-c1','name'=>'form_type','value'=>'save_change','style'=>'text-align:center;margin-top:8px;')); ?>
             </div>
@@ -185,7 +186,7 @@
               foreach($itemlist as $key=>$value) { ?>
                 <div class="formrow22011">
                     <tr>
-                   <td><input type="checkbox" id="row_id_<?php echo $i;?>" value="<?php echo $value['id']; ?>" onclick="getItemsList('<?php echo $value['id']; ?>','<?php echo $value['name']; ?>','<?php echo $value['item_code']; ?>','<?php echo $value['item_price']; ?>','<?php echo $value['item_quantity']; ?>','<?php echo $i;?>');"></td>
+                   <td><input type="checkbox" id="row_id_<?php echo $i;?>" value="<?php echo $value['id']; ?>" onclick="getItemsList('<?php echo $value['id']; ?>','<?php echo $value['name']; ?>','<?php echo $value['item_code']; ?>','<?php echo $value['item_price']; ?>','<?php echo $value['item_quantity']; ?>','<?php echo $i;?>');" class="pchk"></td>
                    <td><?php echo ucfirst($value['name']);  ?></td>
                    <td><?php echo $value['item_code'];  ?></td>
                    <td><?php echo $value['item_price'];  ?></td> 
@@ -293,6 +294,11 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     modal.style.display = "block";
+
+    checkuncheck();
+   
+
+
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -311,16 +317,68 @@ window.onclick = function(event) {
 
 
 
+//iterate through each textboxes and add the values
+   
+
+document
+
+
+</script>
+<script>
+
+function checkuncheck(){
+
+      productid=[];
+    $(".pid").each(function () {
+
+         //add only if the value is number
+         if (this.value !='NaN' && this.value.length != 0) {
+             productid.push(this.value);
+         }
+
+     });
+
+
+
+            //  $('.pchk').attr('checked', true);
+
+ $(".pchk").each(function () {
+
+         //add only if the value is number
+         if (this.value !='NaN' && this.value.length != 0) {
+
+          //  alert(this.id);
+            var cv=this.value;
+           // alert(cv);
+
+          //  alert(productid.length);
+           // break;
+            if (productid !='NaN' && productid.length != 0) {
+           /* if($.inArray(cv, productid)){
+                       //  alert("bb");
+
+             // $('#'+this.id).attr('checked', true);
+
+            }*/
+
+              if(jQuery.inArray(cv, productid) != -1) {
+                         $('#'+this.id).attr('checked', true);
+                      } else {
+                        $('#'+this.id).attr('checked', false);
+                      }
+
+         }
+       }
+
+
+     });
 
 
 
 
 
 
+//alert(productid);
 
-
- 
- 
-
-
+}
 </script>

@@ -20,7 +20,7 @@ class UsersController extends AppController
 		
 			//$this->set('state',$this->Common->getState(101));
 			//$this->set('country',$this->Common->getCountryList());
-			
+			$this->viewBuilder()->layout('admin');
 	  
         
     }
@@ -29,6 +29,7 @@ class UsersController extends AppController
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', ['login','editmember','reply']);
         $this->Auth->allow(['login','reply']); 
+        $this->viewBuilder()->layout('admin');
     }
 
     public function index($request_type=null)

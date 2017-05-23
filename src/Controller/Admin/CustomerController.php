@@ -22,6 +22,7 @@ class CustomerController extends AppController
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', []);
         
+        $this->viewBuilder()->layout('admin');
     }
    
     public function beforeRender(Event $event)
@@ -82,7 +83,7 @@ class CustomerController extends AppController
            'limit' => 10,
              'conditions' => array('status'=>'1',$conditions),
           //  'contain' => ['Stock','ItemPrice'],
-           'order'=>array('Customer.Name'=>'ASC'),
+           'order'=>array('Customer.created_date'=>'DESC'),
        );
                 
     $result = $this->paginate('Customer');
@@ -190,9 +191,7 @@ public function uploadcustomercsv(){
 if($this->request->is('post')) {
 
 
-                $itemtempTable             =            TableRegistry::get('customer_temp');
-
-                  // $itemtempTable->deleteall();
+                    $itemtempTable      =      TableRegistry::get('customer_temp');
                
                     $this->Common->deletealltable('customer_temp');
 

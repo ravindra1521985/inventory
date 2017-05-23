@@ -21,6 +21,7 @@ class ItemsController extends AppController
     { 
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', []);
+        $this->viewBuilder()->layout('admin');
         
     }
    
@@ -86,7 +87,7 @@ class ItemsController extends AppController
            'limit' => 10,
             'conditions' => array('status'=>1, $conditions),
           //  'contain' => ['Stock','ItemPrice'],
-         'order'=>array('name'=>'ASC'),
+         'order'=>array('created_date'=>'desc'),
            //->Order(['name'=>'Asc'])
        );
                 

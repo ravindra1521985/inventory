@@ -21,6 +21,7 @@
                           <div id="no-more-tables">
 						  <div style="padding-bottom:20px;">
 
+              <div style="overflow:scroll;height:auto;width:100%;overflow:auto;">
                 <div  class="newbuttton">
               <a href="<?php echo SITEURL; ?>admin/customer/downloadexcel">Download</a>
               </div>
@@ -99,7 +100,7 @@
         <?php echo $this->element(ADMIN.'paging'); ?>
     </div>
 
-
+</div>
                           </div>
                         </div>
                       </div>

@@ -69,8 +69,21 @@ $("#search").on("keyup", function() {
                    $('#c_id').val(Jdata.id);
                     $('#email').val(Jdata.email);
                     $('#cr_amount').val(Jdata.cr_amount);
-                      $('#dr_amount').val(Jdata.dr_amount);
+                    //$('#cr_blance1').val(Jdata.cr_amount);
+                     $('#dr_amount').val(Jdata.dr_amount);
+                      //$('#blance_due').val(Jdata.dr_amount);
                       $('#detail').val(Jdata.dr_amount);
+
+                    $('#phone').attr('readonly', 'true');
+                   $('#c_id').val(Jdata.id);
+                   $('#email').attr('readonly', 'true');
+                   // $('#cr_amount').val(Jdata.cr_amount);
+                     $('#cr_amount').attr('readonly', 'true');
+                     // $('#cr_blance1').attr('readonly', 'true');
+                     // $('#blance_due').attr('readonly', 'true');
+                      $('#dr_amount').attr('readonly', 'true');
+                      $('#detail').attr('readonly', 'true');
+                      //$('#detail').val(Jdata.dr_amount);
 
                 },
                // beforeSend: function() {
@@ -94,6 +107,42 @@ $("#search").on("keyup", function() {
 
 
 });/*end of document ready*/
+
+
+//var start = new Date('01-01-2016');
+// set end date to max one year period:
+//var end = new Date(new Date().setYear(start.getFullYear()+2));
+
+// payment due date picker validation
+
+
+$('#fdate').datepicker({
+	 format: 'dd-mm-yyyy',
+    	//startDate : start,
+     autoclose: true,
+   // endDate   : end
+ 
+// update "toDate" defaults whenever "fromDate" changes
+}).on('changeDate', function(){
+    // set the "toDate" start to not be later than "fromDate" ends:
+    $('#tdate').datepicker('setStartDate',$(this).val());
+
+}); 
+
+$('#tdate').datepicker({
+	format: 'dd-mm-yyyy',
+  //  startDate : start,
+     autoclose: true,
+  //  endDate   : end
+     
+// update "fromDate" defaults whenever "toDate" changes
+}).on('changeDate', function(){
+    // set the "fromDate" end to not be later than "toDate" starts:
+    $('#fdate').datepicker('setEndDate',$(this).val());
+});
+
+
+
    });
 
 
@@ -148,6 +197,43 @@ function calculateSum() {
    document.getElementById("totalamount").value=sum.toFixed(2);
    
  }
+
+
+
+function calculateSum1() {
+
+   
+   var total_amount=document.getElementById("totalamount").value;
+   var paid_amount=document.getElementById("paid_amount").value;
+   if(paid_amount==''){
+   	paid_amount=0;
+   }
+   var creadetamount=document.getElementById("cr_blance1").value;
+    if(creadetamount==''){
+   	creadetamount=0;
+   }
+
+   var dr_amount=document.getElementById("dr_amount").value;
+   if(dr_amount==''){
+   	dr_amount=0;
+   }
+
+
+		if(parseFloat(paid_amount)+parseFloat(creadetamount) > parseFloat(total_amount)+parseFloat(dr_amount)){
+			alert("Please enter valid amount.");
+				document.getElementById("paid_amount").value=0;
+				document.getElementById("cr_blance1").value=0;
+		}
+
+
+   if(parseFloat(total_amount) >= (parseFloat(paid_amount)+parseFloat(creadetamount))-(parseFloat(dr_amount))){
+
+   	var due_amount = parseFloat(total_amount)-(parseFloat(paid_amount)+parseFloat(creadetamount));
+   			document.getElementById("blance_due").value=parseFloat(due_amount)+(parseFloat(dr_amount));
+   }
+   
+ }
+
 	
 	
 function amoutcal(id)
@@ -158,7 +244,8 @@ function amoutcal(id)
 
     var stockvalue=document.getElementById("qty_"+res[1]).value;
 
-    if(qty>stockvalue){
+   
+    if(parseFloat(qty) > parseFloat(stockvalue)){
       alert("Qunatity is more than stock");
       document.getElementById("stockqty_"+res[1]).value='';
       return false;

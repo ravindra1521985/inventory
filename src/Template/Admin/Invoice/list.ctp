@@ -27,15 +27,21 @@
               <div  class="newbuttton">
               <a href="<?php echo SITEURL; ?>admin/customer/uploadcustomercsv">Upload</a>
               </div>-->
+               <div style="overflow:scroll;height:600px;width:100%;overflow:auto">
 						  <div  class="newbuttton">
 						  <a href="<?php echo SITEURL; ?>admin/invoice/addinvoice">Add New </a>
 						  </div>
               
+               
+
 						   <div id="filter11">
 						  
                   <?php  echo  $this->Form->create('',['controller'=>'invoice','action'=>'list','id'=>'searchf','class'=>'form-horizontal']);  ?>
-								Search Item &nbsp;&nbsp;&nbsp;: 
-                   <?php echo $this->Form->text('search', array('class'=>'input_filter','maxlength'=>100,'placeholder'=>'Enter search Invoice id, Amount,dr_amount,cr_amount, in same order comma separated','id'=>'search','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: center;width:500px;')); ?>
+								Search &nbsp;&nbsp;&nbsp;: 
+                      <?php echo $this->Form->select('customer',$custlist,['id'=>'customer','class'=>'input_filter','default'=>'', 'empty'=>'Select Customer','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: left;width:150px;']); ?>
+                        <?php echo $this->Form->text('search', array('class'=>'input_filter','maxlength'=>100,'placeholder'=>'Invoice id, Amount,dr_amount,cr_amount, in same order comma separated','id'=>'search','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: center;width:360px;')); ?>
+                   <?php echo $this->Form->text('fromdate', array('class'=>'input_filter datepicker','maxlength'=>100,'placeholder'=>'From date','id'=>'fdate','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: left;width:120px;')); ?>
+                   <?php echo $this->Form->text('todate', array('class'=>'input_filter datepicker','maxlength'=>100,'placeholder'=>'To date','id'=>'tdate','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: left;width:120px;')); ?>
 
              <input type="submit" value="Search">
                  <?php echo $this->Form->end();?>
@@ -45,7 +51,7 @@
 							  <br>
                 <?php //print_r($custlist);?>
                
-                              <table class="col-md-12 table-bordered table-striped table-condensed cf paddLeftZero " id="filter">
+                              <table class="col-md-12 table-bordered table-striped table-condensed cf paddLeftZero " id="filter" width="800">
                               <thead class="cf">
                                 <tr class="myHead">
                                   <th>Sr.no. <span><i class="fa fa-sort"></i></span> </th>
@@ -54,7 +60,7 @@
                 								  <th>Total Amount<span><i class="fa fa-sort"></i></span></th>
                                    <th>Dr.Amount<span><i class="fa fa-sort"></i></span></th>
                 								  <th>Cr.Amount<span><i class="fa fa-sort"></i></span></th>                         
-                                   <th>Created_date<span><i class="fa fa-sort"></i></span></th>
+                                   <th>Created Date<span><i class="fa fa-sort"></i></span></th>
                                    <th>Actions</th>
                                 </tr>
                               </thead>
@@ -73,12 +79,12 @@
            <td><?php echo date('d-m-Y h:i:s',strtotime($value['created_date']));  ?></td> 
                      
              <td ><?php 
-                          $edit_img = $this->Html->image('edit.png',array('alt'=>'edit','class'=>'','style'=>'width:16px;'));
+                          $print = $this->Html->image('print.png',array('alt'=>'print','class'=>'','style'=>'width:30px;'));
                       $delete_img = $this->Html->image('delete.png',array('alt'=>'delete','class'=>'','style'=>'width:16px;'));
 
             // echo $this->Html->link($edit_img, ['controller' => 'customer', 'action' => 'editcustomer',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?> &nbsp; &nbsp;  
-             <?php echo $this->Html->link( $delete_img, ['controller' => 'invoice', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?>
-              <?php echo $this->Html->link('Print', ['controller' => 'invoice', 'action' => 'print',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?>
+             <?php echo $this->Html->link( $delete_img, ['controller' => 'invoice', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'title'=>'delete')); ?>&nbsp; &nbsp;&nbsp; &nbsp;
+              <?php echo $this->Html->link($print, ['controller' => 'print', 'action' => 'printinvoice',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'target'=>'_blank','title'=>'print')); ?>
 			 
 			</td>
                   
@@ -96,7 +102,7 @@
         <?php echo $this->element(ADMIN.'paging'); ?>
     </div>
 
-
+</div>
                           </div>
                         </div>
                       </div>
@@ -105,7 +111,4 @@
     </div>
   </div>
 </section>
-
-
-
-
+  

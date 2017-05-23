@@ -21,7 +21,7 @@ class HomeController extends AppController
     { 
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', []);
-        
+          $this->viewBuilder()->layout('admin');
     }
    
     public function beforeRender(Event $event)
@@ -34,7 +34,8 @@ class HomeController extends AppController
     {
        
 	  
-	
+	     $this->set('customer',count($this->Common->getcustomerlist()));
+        $this->set('item',count($this->Common->getitemrecord()));
 		
     }
     

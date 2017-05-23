@@ -105,17 +105,8 @@ header .topHeader {width: 100%; position:relative; padding:12px 0px; background:
 /*=====================Table Code start=======================*/
 .headTextTable {  font-size: 22px;  font-weight: normal;padding:12px 0px;}
 
-@media only screen and (max-width: 980px) {
-/* Force table to not be like tables anymore */
-#no-more-tables table, #no-more-tables thead, 	#no-more-tables tbody, 	#no-more-tables th, 	#no-more-tables td, 	#no-more-tables tr {display: block;}
- 	/* Hide table headers (but not display: none;, for accessibility) */
-#no-more-tables thead tr { position: absolute;top: -9999px;	left: -9999px;}
-#no-more-tables tr { border: 1px solid #ccc; }
-#no-more-tables td {/* Behave  like a "row" */border: none;border-bottom: 1px solid #eee;position: relative;padding-left: 50%;white-space: normal;text-align:left;}
-#no-more-tables td:before {	/* Now like a table header */position: absolute;/* Top/left values mimic padding */	top: 6px;left: 6px;	width: 45%; padding-right: 10px; white-space: nowrap;	text-align:left;font-weight: bold;}
-/*	Label the data	*/
-#no-more-tables td:before { content: attr(data-title); }
-}
+
+
 .table-bordered {  font-size:14px;}
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {  padding: 10px;}
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {  padding: 6px; text-align:center;}
@@ -898,7 +889,7 @@ padding-left: 15px;
 
 .center-div .cancel a{ color:#009}
 
-.block-1{ border:1px solid #8a8a8a; overflow:hidden; padding:0 0 20px 0;}
+.block-1{ border:1px solid #e1d7d7; overflow:hidden; padding:0 0 20px 0;}
 
 .pd-lr{ padding:0 20px;}
 

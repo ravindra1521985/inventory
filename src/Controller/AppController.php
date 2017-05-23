@@ -157,12 +157,12 @@ class AppController extends Controller
 		  if(isset($this->request->params['prefix']) && ($this->request->params['prefix'] == 'admin'))
         {
 			
-             $this->viewBuilder()->layout('admin');
+           // $this->viewBuilder()->layout('admin');
         }
         else
         {
 			  
-            $this->viewBuilder()->layout('home');
+           // $this->viewBuilder()->layout('home');
         }
         //$this->Auth->allow(['index', 'view', 'display']);
         ///////////  code for privilege
