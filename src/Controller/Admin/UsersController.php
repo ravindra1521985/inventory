@@ -49,46 +49,35 @@ class UsersController extends AppController
         else
         {
             $this->Auth->config('authenticate', ['Form' => ['userModel' =>'admin']]);
-            if ($this->request->is('post')) { 
+            if ($this->request->is('post')) {  
+
+            	 if($this->request->data['user_id']!="" && $this->request->data['password']!=""){             
                
+
                 $user = $this->Auth->identify();
-				
-			//	print_r($this->request->data);
-				//die;
-				
+									
                 if ($user) { 
                     $user['login_time'] = date('M d Y H:i:s');
                     $user['type'] = $this->request->data['type'];
                    
-                    /* insert into user log table*/
-                   // $this->Business->userlog('admin',$user['id']);
-				   
+                 		   
 				     $this->Common->userlog($user['type'],$user['id']);
                    
-                    //////  check privilege
-                  //  $tt=$this->Business->getadminprivilege($user['group_id']);                   
-                    
-                //   $this->request->session()->Write('User.AllowedActions',$tt);
-                    // end privilege
+                 
                    
                     $this->Auth->setUser($user);
-                    if ($this->request->is('ajax')) {
-                        echo json_encode(array('status'=>SUCCESS,'msg'=>SYSTEM_MESSAGE_SUCCESS_LOGIN,'url'=>$this->Auth->redirectUrl()));
-                    }
-                    else
-                    {
-                        return $this->redirect($this->Auth->redirectUrl());
-                    }
-                }
-                else
+                   
+                    	 return $this->redirect($this->Auth->redirectUrl());
+
+                }else{
+                	  $this->Flash->error(__("Username or Password Invalid."));
+                	 }
+
+            	}else
                 { 
-                    if ($this->request->is('ajax')) {
-                        echo json_encode(array('status'=>FAILURE,'msg'=>SYSTEM_MESSAGE_INVALID_LOGIN,'url'=>''));
-                    }
-                    else
-                    { 
-                        $this->Flash->error(__(SYSTEM_MESSAGE_INVALID_LOGIN));
-                    }
+                    
+                        $this->Flash->error(__("Username or Password Is Empty."));
+                    
                 }
             }
 

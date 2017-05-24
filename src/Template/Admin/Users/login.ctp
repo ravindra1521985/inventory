@@ -2,7 +2,15 @@
   <div class="login-area">
     <h1>LOGIN FOR ADMINS</h1>
     <h2>Please fill the details blow:</h2>
-    <?= $this->Form->create(null,['id'=>'adminLogin','class'=>'loginform form-horizontal']) ?> 
+      <span style="color: red;
+font-size: 18px;
+font-weight: normal;
+font-family: 'Lato-Regular';
+text-align: center;
+margin-bottom: 30px;
+margin-top: 0;
+margin-left: 190px;"><?php  echo $this->element(Admin.'/session_flash_a'); ?></span>
+    <?= $this->Form->create(null,['id'=>'adminLogin','class'=>'loginform form-horizontal','autocomplete'=>'off']) ?> 
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
         <div class="col-sm-10">
