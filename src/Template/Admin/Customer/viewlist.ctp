@@ -34,7 +34,7 @@
               
 						   <div id="filter11">
 						  
-                  <?php  echo  $this->Form->create('',['controller'=>'customer','action'=>'list','id'=>'searchf','class'=>'form-horizontal']);  ?>
+                  <?php  echo  $this->Form->create('',['controller'=>'customer','action'=>'viewlist','id'=>'searchf','class'=>'form-horizontal']);  ?>
 								Search Item &nbsp;&nbsp;&nbsp;: 
                    <?php echo $this->Form->text('search', array('class'=>'input_filter','maxlength'=>100,'placeholder'=>'Enter search Name, phone, email, dramount,cr.amount, in same order comma separated','id'=>'search','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: center;width:500px;')); ?>
 

@@ -117,8 +117,36 @@ class CommonComponent extends Component
         ->send($message);
 	   
    }
-      
-   
+    
+     public function sendEmail2($to=null,$message=null,$subject=null)
+        {
+            $email = new Email('default');
+          $email->from(['singh85@gmail.com'=>'Inventory'])
+            ->to($to)
+            ->subject($subject)
+            ->template('fail', 'default')
+           ->emailFormat('html')
+            ->send($message);
+
+
+     /*   $email = new Email('production');
+        $email->template('all_mails','production')               
+            ->emailFormat('html')
+            ->to('singh85.ravindra@gmail.com')
+            ->from(['singh85.ravindra@gmail.com'=>'inventory'])
+            ->subject($subject)
+           // ->viewVars(['user_type'=>'aa','title'=>'aaa'])
+          //  ->send();
+       prd($email);*/
+
+
+
+
+
+
+       
+            }  
+
   
 	
     public function uploadimg($file,$path){

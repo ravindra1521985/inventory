@@ -43,7 +43,7 @@ class InvoiceController extends AppController
     }
 
     /* List of item*/
-    public function list()
+    public function viewlist()
     {       
       
         $this->loadModel('Invoice');
@@ -122,6 +122,9 @@ class InvoiceController extends AppController
     /* add customer */
     public function addinvoice(){
 
+         // $this->Common->sendEmail2('singh85.ravinddra@gmail.com','1','New Invoice');
+
+
         $this->loadModel('Customer');
 
             $this->set('custlist',$this->Common->getcustomerlist());
@@ -129,7 +132,7 @@ class InvoiceController extends AppController
              $this->set('itemlist',$this->Common->getitemrecord());
 
               $this->loadModel('Invoice');
-        $inv=$this->Invoice->find()->last();
+            $inv=$this->Invoice->find()->last();
 
 
         if ($this->request->is('post')) { 
@@ -241,7 +244,7 @@ class InvoiceController extends AppController
 
                                 ';*/
 
-                              //  $this->Common->sendEmail2('singh85.ravinddra@gmail.com',$invid,'New Invoice')
+                            //  $this->Common->sendEmail2('singh85.ravinddra@gmail.com',$invid,'New Invoice');
 
                                 //$this->Flash->success(__("Record Added")); 
                                 //return $this->redirect(['action' => 'list']);
@@ -254,14 +257,14 @@ class InvoiceController extends AppController
     {
         $conn->commit();
         $this->Flash->success(__("Record Added")); 
-      return $this->redirect(['action' => 'list']);
+      return $this->redirect(['action' => 'viewlist']);
 
     }
     else
     {
         $conn->rollback(); 
           $this->Flash->errot(__("Please inter valid data")); 
-      return $this->redirect(['action' => 'list']);        
+      return $this->redirect(['action' => 'viewlist']);        
 
     }
 

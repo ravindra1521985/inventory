@@ -36,7 +36,7 @@
 
 						   <div id="filter11">
 						  
-                  <?php  echo  $this->Form->create('',['controller'=>'invoice','action'=>'list','id'=>'searchf','class'=>'form-horizontal']);  ?>
+                  <?php  echo  $this->Form->create('',['controller'=>'invoice','action'=>'viewlist','id'=>'searchf','class'=>'form-horizontal']);  ?>
 								Search &nbsp;&nbsp;&nbsp;: 
                       <?php echo $this->Form->select('customer',$custlist,['id'=>'customer','class'=>'input_filter','default'=>'', 'empty'=>'Select Customer','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: left;width:150px;']); ?>
                         <?php echo $this->Form->text('search', array('class'=>'input_filter','maxlength'=>100,'placeholder'=>'Invoice id, Amount,dr_amount,cr_amount, in same order comma separated','id'=>'search','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: center;width:360px;')); ?>

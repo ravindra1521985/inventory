@@ -218,6 +218,10 @@ return [
           //  'charset' => 'utf-8',
           //  'headerCharset' => 'utf-8',
         ],
+         'production' => [
+            'transport' => 'default',
+            //'log' => true,
+        ]
     ],
 
     /**

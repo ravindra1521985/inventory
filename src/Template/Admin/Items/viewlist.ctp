@@ -33,7 +33,7 @@
               
 						   <div id="filter11">
 						  
-								<?php  echo  $this->Form->create('',['controller'=>'items','action'=>'list','id'=>'searchf','class'=>'form-horizontal']);  ?>
+								<?php  echo  $this->Form->create('',['controller'=>'items','action'=>'viewlist','id'=>'searchf','class'=>'form-horizontal']);  ?>
                 Search Item &nbsp;&nbsp;&nbsp;: 
                    <?php echo $this->Form->text('search', array('class'=>'input_filter','placeholder'=>'Enter search Name, code, price, quantity in same order comma separated','id'=>'search','style'=>'border: 1px solid gainsboro;border-radius: 4px;height: 27px;text-align: center;width:500px')); ?>
                          <input type="submit" value="Search">

@@ -40,7 +40,7 @@ class CustomerController extends AppController
     }
 
     /* List of item*/
-    public function list()
+    public function viewlist()
     {       
       
         $this->loadModel('Customer');
@@ -110,7 +110,7 @@ class CustomerController extends AppController
                         if(count($custrecord)>0){
 
                         $this->Flash->error(__("Customer already exists")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                         }
 
 
@@ -124,7 +124,7 @@ class CustomerController extends AppController
                         $this->request->data['id']=$customer1->id;
                         $this->Common->customerlog($this->request->data,'manual');
                         $this->Flash->success(__("Record Added")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                     }
        
                 }
@@ -151,7 +151,7 @@ class CustomerController extends AppController
                         if(count($custecord)>0){
 
                         $this->Flash->error(__("Customer already exists")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                         die;
                         }
  
@@ -165,7 +165,7 @@ class CustomerController extends AppController
                     //  $this->Common->customerlog($customer,$this->request->session()->read('Auth.User.id'),'manual');
                 $this->Common->customerlog($this->request->data,'manual');
                         $this->Flash->success(__("Record Added")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
             }
 
             }
@@ -181,7 +181,7 @@ public function delete($id=null){
               }
     $this->Common->statusupdate('customer',$id,'1');
      $this->Flash->success(__("Record Deleted")); 
-                return $this->redirect(['action' => 'list']);
+                return $this->redirect(['action' => 'viewlist']);
 }
 
 
@@ -293,7 +293,7 @@ if(($handle = fopen($csv1, "r")) !== FALSE) {
 
  $this->Common->deletealltable('customer_temp');
                 $this->Flash->success(__("Record Added")); 
-               return $this->redirect(['action' => 'list']);
+               return $this->redirect(['action' => 'viewlist']);
 
 }
 

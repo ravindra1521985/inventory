@@ -40,7 +40,7 @@ class ItemsController extends AppController
     }
 
     /* List of item*/
-    public function list()
+    public function viewlist()
     {       
       
         $this->loadModel('Items');
@@ -111,7 +111,7 @@ class ItemsController extends AppController
                         if(count($itemrecord)>0){
 
                         $this->Flash->error(__("Item already exists")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                         }
 
              
@@ -132,7 +132,7 @@ class ItemsController extends AppController
 
                   
                         $this->Flash->success(__("Record Added")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                    
                      }
 
@@ -163,7 +163,7 @@ class ItemsController extends AppController
                         if(count($itemrecord)>0){
 
                         $this->Flash->error(__("Item already exists")); 
-                        return $this->redirect(['action' => 'list']);
+                        return $this->redirect(['action' => 'viewlist']);
                         }
 
 
@@ -185,7 +185,7 @@ class ItemsController extends AppController
 						  $this->Common->itemlog($item->id,$item->name,$item->item_code,$item->item_price,$item->item_quantity,$this->request->session()->read('Auth.User.id'),'manual');
 				
                            $this->Flash->success(__("Record Update")); 
-                            return $this->redirect(['action' => 'list']);
+                            return $this->redirect(['action' => 'viewlist']);
                      
                 }
             }
@@ -304,7 +304,7 @@ if(($handle = fopen($csv1, "r")) !== FALSE) {
 
  $this->Common->deletealltable('items_temp');
               $this->Flash->success(__("Record Added")); 
-              return $this->redirect(['action' => 'list']);
+              return $this->redirect(['action' => 'viewlist']);
 
 }
 
@@ -366,7 +366,7 @@ if(($handle = fopen($csv1, "r")) !== FALSE) {
 }
 
                 $this->Flash->success(__("Record Added")); 
-                return $this->redirect(['action' => 'list']);
+                return $this->redirect(['action' => 'viewlist']);
 
 }
 
@@ -378,7 +378,7 @@ if(($handle = fopen($csv1, "r")) !== FALSE) {
               }
     $this->Common->statusupdate('items',$id,'1');
      $this->Flash->success(__("Record Deleted")); 
-                return $this->redirect(['action' => 'list']);
+                return $this->redirect(['action' => 'viewlist']);
 }
 
 

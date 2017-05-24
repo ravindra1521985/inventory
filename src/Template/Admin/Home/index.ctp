@@ -15,7 +15,7 @@
 				 <?php 
 
 			$hd = $this->Html->image('product.png',array('class'=>'img-responsive1 mrgleft2'));
-echo $this->Html->link($hd,array('controller'=>'items', 'action'=>'list'), array('escape'=>false));
+echo $this->Html->link($hd,array('controller'=>'items', 'action'=>'viewlist'), array('escape'=>false));
 
 
 				// echo $this->Html->image('AdminDasboradzIcon/Total-End---Consumers-added.png',['class'=>'img-responsive1 mrgleft2']); ?>
@@ -34,7 +34,7 @@ echo $this->Html->link($hd,array('controller'=>'items', 'action'=>'list'), array
 				 <?php 
 
 $hd = $this->Html->image('customer.png',array('class'=>'img-responsive1 mrgleft2'));
-echo $this->Html->link($hd,array('controller'=>'customer', 'action'=>'list'), array('escape'=>false));
+echo $this->Html->link($hd,array('controller'=>'customer', 'action'=>'viewlist'), array('escape'=>false));
 				 //echo $this->Html->image('AdminDasboradzIcon/Total-End---Consumers-added.png',['class'=>'img-responsive1 mrgleft2']); ?>
 				 
                  

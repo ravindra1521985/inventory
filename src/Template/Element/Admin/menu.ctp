@@ -55,7 +55,7 @@
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Item management</a>
                     <ul class="dropdown-menu">
             <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
-				   <li><a href="<?php echo $this->Url->build(array('controller'=>'items','action'=>'list')); ?>"> Item List</a></li>
+				   <li><a href="<?php echo $this->Url->build(array('controller'=>'items','action'=>'viewlist')); ?>"> Item List</a></li>
             
 				 <?php  } ?>		
                   </ul>
@@ -65,7 +65,7 @@
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Customer management</a>
                     <ul class="dropdown-menu">
             <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
-           <li><a href="<?php echo $this->Url->build(array('controller'=>'customer','action'=>'list')); ?>"> Customer List</a></li>
+           <li><a href="<?php echo $this->Url->build(array('controller'=>'customer','action'=>'viewlist')); ?>"> Customer List</a></li>
             
          <?php  } ?>    
                   </ul>
@@ -75,7 +75,7 @@
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Invoice management</a>
                     <ul class="dropdown-menu">
             <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
-           <li><a href="<?php echo $this->Url->build(array('controller'=>'invoice','action'=>'list')); ?>"> invoice List</a></li>
+           <li><a href="<?php echo $this->Url->build(array('controller'=>'invoice','action'=>'viewlist')); ?>"> invoice List</a></li>
             
          <?php  } ?>    
                   </ul>
