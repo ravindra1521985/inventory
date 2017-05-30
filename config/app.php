@@ -10,7 +10,7 @@ return [
      * true: Errors and warnings shown.
      */
   //  'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
-	'debug' => false,
+	'debug' => true,
 
     /**
      * Configure basic information about the application.
@@ -230,9 +230,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'jain',
-            'password' => 'jainjain',
-            'database' => 'jain',
+            'username' => 'myphlebo',
+            'password' => 'myphlebo',
+            'database' => 'inventory_billing',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
@@ -270,9 +270,9 @@ return [
             'persistent' => false,
             'host' => 'localhost',
             //'port' => 'non_standard_port_number',
-            'username' => 'jain',
-            'password' => 'jainjain',
-            'database' => 'jain',
+            'username' => 'myphlebo',
+            'password' => 'myphlebo',
+            'database' => 'inventory_billing',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

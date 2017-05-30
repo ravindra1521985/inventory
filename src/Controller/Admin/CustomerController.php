@@ -39,6 +39,165 @@ class CustomerController extends AppController
 		
     }
 
+
+    /* view list*/
+
+
+    public function viewuser(){
+
+       $this->loadModel('Admin');
+
+        if($this->request->is('post'))
+        {
+
+            if(isset($this->request->data['search']) && !empty($this->request->data['search']))
+                {
+                   
+                  $search = explode(",",$this->request->data['search']);
+
+                     if(isset($search[0]) && !empty($search[0])){
+                     $conditions['user_id LIKE ']='%'.$search[0].'%';
+                    }
+
+
+                    if(isset($search[1]) && !empty($search[1])){
+                     $conditions['first_name LIKE ']='%'.$search[1].'%';
+                    }
+                    if(isset($search[2]) && !empty($search[2])){
+                     $conditions['last_name LIKE ']='%'.$search[2].'%';
+                    }
+
+                     
+                     if(isset($search[3]) && !empty($search[3])){
+                     $conditions['email LIKE ']='%'.$search[3].'%';
+                    }
+                   
+                    
+
+                }
+
+
+             
+        }
+
+
+        $this->paginate = array(
+           'limit' => 10,
+             'conditions' => array('status'=>'1',$conditions),
+          //  'contain' => ['Stock','ItemPrice'],
+           'order'=>array('Admin.created_date'=>'DESC'),
+       );
+                
+          $result = $this->paginate('Admin');
+    //prd($result);
+          $this->set('user',$result);
+
+
+    }
+
+    public function edituser($id=null){
+
+          if(!empty($id)){
+                  $id=base64_decode($id);             
+                  $this->loadModel('Admin');            
+                  $admin = $this->Admin->get($id);      
+                  $this->set('customer_record', $admin);
+                }
+       
+            
+           if ($this->request->is('post')) {
+
+                
+                       
+                      
+            $data['created_by']    =     $this->request->session()->read('Auth.User.id') ;
+            $data['user_id']       =     $this->request->data['user_id'] ;
+            $data['id']            =     $this->request->data['id'] ;
+            $data['mobile']        =     $this->request->data['mobile'] ;
+            $data['email']         =     $this->request->data['email'] ;
+            $data['grouptype']     =     $this->request->data['grouptype'] ;
+
+            if($this->request->data['password'] !=""){
+
+                $hasher = new DefaultPasswordHasher();
+
+                    $data['password']  = $hasher->hash($this->request->data['password']);
+
+            
+         
+            $admin = $this->Admin->newEntity(); 
+
+
+            $admin1 = $this->Admin->patchEntity($admin, $data);
+            if($this->Admin->save($admin1)) {
+                
+               
+                        $this->Flash->success(__("Record Added")); 
+                      return $this->redirect(['action' => 'viewuser']);
+               }
+
+            }
+          }
+
+
+
+
+
+    }
+
+    public function adduser(){
+
+
+         $this->loadModel('Admin');
+      
+        if ($this->request->is('post')) { 
+
+
+          //  print_r($this->request->data);
+
+          $this->request->data['grouptype']=$this->request->data['group'];
+
+          $this->request->data['created_by']    =     $this->request->session()->read('Auth.User.id') ;
+           
+            $hasher = new DefaultPasswordHasher();
+
+            $this->request->data['password'] = $hasher->hash($this->request->data['password']);
+
+            $admin = $this->Admin->newEntity();     
+            $admin1 = $this->Admin->patchEntity($admin, $this->request->data);
+            if($this->Admin->save($admin1)) {
+                //return $this->redirect(['action' => 'index']);
+                        /*itemlog USE FOR ITEM LOG*/
+                     
+                        $this->Flash->success(__("Record Added")); 
+                        return $this->redirect(['action' => 'viewuser']);
+                    }
+
+
+
+
+                      }
+
+
+
+
+
+    }
+
+    public function deleteuser($id=null){
+
+          if(!empty($id)){
+                  $id=base64_decode($id);
+              }
+            $this->Common->statusupdate('admin',$id,'1');
+            $this->Flash->success(__("Record Deleted")); 
+                return $this->redirect(['action' => 'viewuser']);
+
+    }
+
+
+
+
     /* List of item*/
     public function viewlist()
     {       
@@ -316,6 +475,7 @@ public function downloadexcel(){
         $this->Common->export_excel($fileName, $data11,'Customer');
     
 } 
+
 
 
     

@@ -14,14 +14,14 @@ margin-left: 190px;"><?php  echo $this->element(Admin.'/session_flash_a'); ?></s
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
         <div class="col-sm-10">
-          <?php echo $this->Form->text('user_id',array('class'=>'form-control required','placeholder'=>'Please enter  user name')); ?>  
+          <?php echo $this->Form->text('user_id',array('class'=>'form-control required','placeholder'=>'Please enter  user name','required'=>'required')); ?>  
           
         </div>
       </div>
       <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
-            <?= $this->Form->password('password',array('class'=>'form-control required','placeholder'=>'Please enter your password')) ?>
+            <?= $this->Form->password('password',array('class'=>'form-control required','placeholder'=>'Please enter your password','required'=>'required')) ?>
             <?= $this->Form->hidden('type',array('value'=>USER_TYPE_ADMIN_PREFIX)) ?>
           
         </div>

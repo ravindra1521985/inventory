@@ -13,13 +13,45 @@ class AjaxController extends AppController
         parent::beforeFilter($event);
 		
 		$this->loadComponent('Common');
-		$this->Security->config('unlockedActions', ['getCityList','checkduplicate']);
+		$this->Security->config('unlockedActions', ['getCityList','checkduplicate','checkuser']);
 
       //  $this->Auth->deny('*');
 		 $this->Auth->allow(); 
         
         $this->viewBuilder()->layout('');
     }
+
+
+    public function checkuser(){
+
+    	$adminTable  = TableRegistry::get('admin');
+			if($this->request->is('post')){
+					if($this->request->data){
+					$myArray = $this->request->data;	
+						// $myArray['user_id'];
+						//die;
+					$cond['user_id ='] = $myArray['user_id'];                                        
+			
+					$getuser = $adminTable
+						->find()
+						->where($cond)
+						->first();
+					}
+                        
+			if(count($getuser)!=0){
+
+			echo json_encode(array('status'=>'Success','user_id'=>$getuser->id));
+			//$this->render(false);
+			 exit;
+		}
+		else{
+				echo json_encode(array('status'=>'Fail'));
+					 exit;
+		}
+
+		}
+
+    } 
 
     public function getStateList($country_id = null)
     {

@@ -42,7 +42,7 @@
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Cr.Amount</label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('cr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'cr_amount','required')); ?>
+                      <?php echo $this->Form->text('cr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'cr_amount','required', 'value'=>0)); ?>
                        <?php echo $this->Form->error('cr_amount'); ?>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Dr.Amount</label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('dr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'dr_amount','required')); ?>
+                      <?php echo $this->Form->text('dr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'dr_amount','required', 'value'=>0)); ?>
                        <?php echo $this->Form->error('dr_amount'); ?>
                     </div>
                   </div>

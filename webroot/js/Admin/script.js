@@ -67,14 +67,19 @@
 // for use decimal  number  formate
 
 $('.number').keypress(function(event) {
-    if (event.which != 46 && (event.which < 47 || event.which > 59))
+
+       if ( event.keyCode == 46 || event.keyCode == 8 ) {
+            // let it happen, don't do anything
+        }else{
+
+    if (event.which != 46 && (event.which < 48 || event.which > 59))
     {
         event.preventDefault();
-        if ((event.which == 46) && ($(this).indexOf('.') != -1)) {
+        if ((event.which == 46 ) && ($(this).indexOf('.') != -1)) {
             event.preventDefault();
           }
         }
-    
+    }
         
 	});
 
@@ -91,6 +96,16 @@ $('.number').keypress(function(event) {
                 event.preventDefault(); 
             }   
         }
+    });
+
+
+ $(".enter").keydown(function(event) {
+       // alert();
+        // Allow only backspace and delete
+       if(event.keyCode == 13) {
+      event.preventDefault();
+     return false;
+    }
     });
 
 	

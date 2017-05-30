@@ -61,10 +61,10 @@ class ItemsController extends AppController
                      $conditions['item_code LIKE ']='%'.$search[1].'%';
                     }
                      if(isset($search[2]) && !empty($search[2])){
-                     $conditions['item_price LIKE ']='%'.$search[2].'%';
+                     $conditions['item_price =']=$search[2];
                     }
                     if(isset($search[3]) && !empty($search[3])){
-                     $conditions['item_quantity LIKE ']='%'.$search[3].'%';
+                     $conditions['item_quantity']=$search[3];
                     }
                      
 
@@ -73,7 +73,6 @@ class ItemsController extends AppController
 
 
         }
-
 
 
 

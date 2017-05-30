@@ -215,13 +215,10 @@ return [
         'default' => [
             'transport' => 'default',
             'from' => 'you@localhost',
-          //  'charset' => 'utf-8',
-          //  'headerCharset' => 'utf-8',
+            'charset' => 'utf-8',
+           'headerCharset' => 'utf-8',
         ],
-         'production' => [
-            'transport' => 'default',
-            //'log' => true,
-        ]
+        
     ],
 
     /**

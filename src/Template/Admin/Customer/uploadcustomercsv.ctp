@@ -1,7 +1,7 @@
 <div class="main-container">
     <div class="content">
       <div class="row1">
-          <div class="col-md-5 col-sm-9">           
+          <div class="col-md-5 col-sm-9" style="margin-left:30%; text-align:center;">           
           <div class="block-1 block-2">
             <h1 class="GreyBox width100per">Upload CSV</h1>
                      
@@ -10,9 +10,9 @@
                   
                 <div class="">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">CSV File</label>
-                    <div class="col-sm-9">                      
-                     <?php echo $this->Form->file('csv',['id'=>'csv']); ?>    
+                    <label for="inputEmail3" class="col-sm-4 control-label" style="text-align:right;">CSV File</label>
+                    <div class="col-sm-6"  style="padding-left:40px;">                      
+                     <?php echo $this->Form->file('csv',['id'=>'csv','required'=>'required']); ?>    
                        <?php echo $this->Form->error('csv'); ?>
                     </div>
                   </div>

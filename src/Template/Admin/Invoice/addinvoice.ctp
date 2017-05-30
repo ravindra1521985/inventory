@@ -1,10 +1,12 @@
+
 <div class="main-container">
     <div class="content">
       <div class="row1">
       
-      <div class="col-md-11 col-sm-10">
+      <div class="col-md-12 col-sm-10">
            
           <div class="block-1 block-2">
+
             <h1 class="GreyBox width100per">Add Invoice</h1>
                      
             <?php  echo  $this->Form->create('',['controller'=>'customer','action'=>'addinvoice','id'=>'addcustomer','class'=>'form-horizontal']);  ?>
@@ -33,7 +35,7 @@
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Customer Phone <span style="color:red;">*</span></label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">CustItem Code omer Phone <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
                       <?php echo $this->Form->text('phone', array('class'=>'form-control numberp','maxlength'=>10,'placeholder'=>'Enter Phone','id'=>'phone','required')); ?>
                        <?php echo $this->Form->error('phone'); ?>
@@ -53,7 +55,7 @@
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Cr.Amount  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('cr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'cr_amount','required')); ?>
+                      <?php echo $this->Form->text('cr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'cr_amount','required','value'=>'0')); ?>
                        <?php echo $this->Form->error('cr_amount'); ?>
                     </div>
                   </div>
@@ -63,7 +65,7 @@
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-3 control-label">Dr.Amount  <span style="color:red;">*</span></label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('dr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'dr_amount','required')); ?>
+                      <?php echo $this->Form->text('dr_amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'dr_amount','required','value'=>'0')); ?>
                        <?php echo $this->Form->error('dr_amount'); ?>
                     </div>
                   </div>
@@ -95,23 +97,65 @@
 
                 <br>
 
-                <div class="col-md-12">
+      <div class="col-md-12">
+     <!--<div class="modal-content">
+   <div class="modal-header">
+      <span class="close">&times;</span>
+     <h2>Item List</h2>
+    </div>-->
+    <div class="modal-body">
+       <h5> Select Item List</h5>
+    <div> 
+    <table><tr><td>Search : Item Name<?php echo $this->Form->input('Search',array('label'=>false,'escape' =>false,'id'=>"search",'type'=>'text','class'=>'form-control enter','placeholder'=>'Enter Item Name','onkeyup'=>'searchitemname(this.value);')); ?></td><td> Item Code<?php echo $this->Form->input('Search',array('label'=>false,'escape' =>false,'id'=>"search1",'type'=>'text','class'=>'form-control enter','placeholder'=>'Enter Item Name','onkeyup'=>'searchcode(this.value);')); ?></td></tr></table>
+    </div>
 
-               <!-- <input type="button" id="myBtn" value="add item">-->
-                </div>
+  <table  id="filter" style="height:300px;display:inline-block;overflow:auto;">
+                              <thead class="cf">
+                                <tr class="myHead">
+                                  <th>Select <span><i class="fa fa-sort"></i></span></th>
+                                  <th width="50%">Item Name<span><i class="fa fa-sort"></i></span></th>
+                                  <th width="30%">Item Code<span><i class="fa fa-sort"></i></span></th>
+                                  <th width="10%">Item Price<span><i class="fa fa-sort"></i></span></th>
+                                  <th width="10%">Item Qunatity<span><i class="fa fa-sort"></i></span></th>
+                                </tr>
+                              </thead>
+       
+                              <?php   $i=1;
+              foreach($itemlist as $key=>$value) { 
+                    if($value['item_quantity'] >0){
+                ?>
+               
+                    <tr>
+                   <td><input type="checkbox" id="row_id_<?php echo $i;?>" value="<?php echo $value['id']; ?>" onclick="getItemsList('<?php echo $value['id']; ?>','<?php echo $value['name']; ?>','<?php echo $value['item_code']; ?>','<?php echo $value['item_price']; ?>','<?php echo $value['item_quantity']; ?>','<?php echo $i;?>');" class="pchk"></td>
+                   <td style="text-align:left !important;"><?php echo ucfirst($value['name']);  ?></td>
+                   <td style="text-align:left !important;"><?php echo $value['item_code'];  ?></td>
+                   <td><?php echo $value['item_price'];  ?></td> 
+                   <td><?php echo $value['item_quantity'];  ?></td> 
+                   </tr>
+                 <?php  $i++; }}  ?>
+                       
+      </table>
+    
+    </div>
+    <div class="modal-footer">
+      <!--<h3>Modal Footer</h3>-->
+    </div>
+    </div>
 
+  
                 <div class="content">
-      <input type="button"   onclick="deleteRowOrder('dataTable')" value="Delete" />
-    <button type="button" id="myBtn" >Add Item</button>
+      <!--<input type="button"   onclick="deleteRowOrder('dataTable')" value="Delete" />-->
+       <!-- <button type="button" id="myBtn1" onclick="getpoup();" >Add Item</button>-->
     <div id="unseen1">
      <table id="dataTables1-example1">
                                     <thead>
                                         <tr>
-                       <th width="4%">Select</th>
-                       <th width="1"></th>
-                                            <th>Item name</th>
-                                            <th width="20%">Item Code </th>
-                                            <th width="15%">Rate</th>                                        
+                       <!--<th width="4%">Select</th>-->
+                                            <th width="1"></th>
+                                            <th width="20%">Item name</th>
+                                            <th width="15%">Item Code </th>
+                                            <th width="15%">Rate</th>  
+                                             <th width="15%">Custom Rate</th>                                       
                                             <th width="15%">QTY</th>
                                             <th width="10%">Stock</th>
                                             <th width="10%">Amount</th>                     
@@ -120,13 +164,14 @@
                                     </thead>
                                   
 <tbody id="dataTable">
-<tr class="row1">
-<td style="white-space:nowrap;"><input name="delitem[]"  type="checkbox" value="" /></td> 
+<tr class="row1" id="p_0" bgcolor="red">
+<!--<td style="white-space:nowrap;"><input name="delitem[]"  type="checkbox" value="" /></td>--> 
 <td><input type="hidden" name="product_id[]" id="product_0" class="pid"/></td>
-<td><input type="text" name="product_name[]" id="productname_0" class="form-control"  readonly /></td>
+<td><input type="text" onclick="getpoup();" name="product_name[]" id="productname_0" class="form-control"  readonly /></td>
 <td><input type="text" name="product_code[]" id="productcode_0" style="width:100%;" class="form-control" readonly/></td>
 <td style="white-space:nowrap"><input type="text" name="product_rate[]" value="" id="productrate_0" style="width:100%;" class="form-control" readonly/></td>
-<td><input type="text" name="stock_qty[]" autocomplete="off"   id="stockqty_0" style="width:100%;" class="form-control"  onkeyup="amoutcal(this.id);" onkeypress="return isNumberKey(event)"/></td>
+<td style="white-space:nowrap"><input type="text"  onkeyup="amoutcal(this.id);" name="mproduct_rate[]" value="" id="mtrate_0"  style="width:100%;" class="form-control number" /></td>
+<td><input type="text" name="stock_qty[]" autocomplete="off" id="stockqty_0" style="width:100%;" class="form-control cqty" onkeyup="amoutcal(this.id);" onkeypress="return isNumberKey(event)" /></td>
 <td><input type="text" name="qty[]" autocomplete="off" id="qty_0" style="width:100%;" class="form-control"  onkeyup="amoutcal(this.id);" onkeypress="return isNumberKey(event)" readonly/></td>
 <td style="white-space:nowrap"><input type="text" name="amount[]" value=""  class="txt" id="amount_0" style="width:100%;" class="form-control" readonly/></td>
 </tr>
@@ -135,15 +180,23 @@
 <input type="hidden" name="" value="0" id="rowcount1" />
 </tbody>
 <tr>
-  <td></td>
-   <td></td>
-    <td></td>
-  <td></td><td>Sub Amount :<?php echo $this->Form->input('totalamount',array('label'=>false,'escape' =>false,'id'=>"totalamount",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
-  <td>Paid Amount :<?php echo $this->Form->input('paid_amount',array('label'=>false,'escape' =>false,'id'=>"paid_amount",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
+    <td style="background-color: #d3e0cb !important;"></td>    
+    
+  <td style="background-color: #d3e0cb !important;">Sub Amount :<?php echo $this->Form->input('sub_amount',array('label'=>false,'escape' =>false,'id'=>"subtotal",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
+   
+     <td style="background-color: #d3e0cb !important;">TAX :
+    <?php 
+        echo $this->Form->select('tax',gettax(),['id'=>'tax','default'=>'18', 'onchange'=>'calculateSum1();','empty'=>'Select TAX','class'=>'form-control',]); ?>
+   
+     </td>
+      <td style="background-color: #d3e0cb !important;">Tax Amount:<?php echo $this->Form->input('tax_amount',array('label'=>false,'escape' =>false,'id'=>"tax_amount",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
+       <td style="background-color: #d3e0cb !important;">Total Amount:<?php echo $this->Form->input('totalamount',array('label'=>false,'escape' =>false,'id'=>"totalamount",'type'=>'text','readonly' => 'readonly','class'=>'form-control')); ?></td>
+        
+  <td style="background-color: #d3e0cb !important;">Paid Amount :<?php echo $this->Form->input('paid_amount',array('label'=>false,'escape' =>false,'id'=>"paid_amount",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
     </td>
-  <td>Cr.Amout :<?php echo $this->Form->input('cr_blance1',array('label'=>false,'escape' =>false,'id'=>"cr_blance1",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
+  <td style="background-color: #d3e0cb !important;">Cr.Amout :<?php echo $this->Form->input('cr_blance1',array('label'=>false,'escape' =>false,'id'=>"cr_blance1",'type'=>'text','class'=>'form-control number','onkeyup'=>'calculateSum1();','value'=>0)); ?>
       </td>
-  <td>Blance Due:<?php echo $this->Form->input('blance_due',array('label'=>false,'escape' =>false,'id'=>"blance_due",'type'=>'text','class'=>'form-control','readonly'=>'readonly')); ?></td>
+  <td style="background-color: #d3e0cb !important;">Blance Due:<?php echo $this->Form->input('blance_due',array('label'=>false,'escape' =>false,'id'=>"blance_due",'type'=>'text','class'=>'form-control','readonly'=>'readonly')); ?></td>
                  
                     </tr>
                     </table>
@@ -153,58 +206,13 @@
                 <br>
                 <div class="text-center mt-20 mb-10 mb-51" style="margin-right:-10%;padding-top:0px;">
                 
-                <?php echo $this->Form->button('Save',array('type'=>'submit','class'=>'btn btn-default btn-c1','name'=>'form_type','value'=>'save_change','style'=>'text-align:center;margin-top:8px;')); ?>
+                <?php echo $this->Form->button('Save',array('type'=>'submit','class'=>'btn btn-default btn-c1','name'=>'form_type','value'=>'save_change','style'=>'text-align:center;margin-top:8px;','onclick'=>'return checkqty();')); ?>
             </div>
                   
               </div>
             <?php echo $this->Form->end();?>
 
-            <div id ='itembox'>
-
-
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Item List</h2>
-    </div>
-    <div class="modal-body">
-  <table class="col-md-12 table-bordered table-striped table-condensed cf paddLeftZero " id="filter" style="height:300px;display:inline-block;overflow:auto;">
-                              <thead class="cf">
-                                <tr class="myHead">
-                                  <th>Select <span><i class="fa fa-sort"></i></span></th>
-                                  <th>Item Name<span><i class="fa fa-sort"></i></span></th>
-                                  <th>Item Code<span><i class="fa fa-sort"></i></span></th>
-                                  <th>Item Price<span><i class="fa fa-sort"></i></span></th>
-                                  <th>Item Qunatity<span><i class="fa fa-sort"></i></span></th>
-                                </tr>
-                              </thead>
        
-                              <?php   $i=1;
-              foreach($itemlist as $key=>$value) { ?>
-                <div class="formrow22011">
-                    <tr>
-                   <td><input type="checkbox" id="row_id_<?php echo $i;?>" value="<?php echo $value['id']; ?>" onclick="getItemsList('<?php echo $value['id']; ?>','<?php echo $value['name']; ?>','<?php echo $value['item_code']; ?>','<?php echo $value['item_price']; ?>','<?php echo $value['item_quantity']; ?>','<?php echo $i;?>');" class="pchk"></td>
-                   <td><?php echo ucfirst($value['name']);  ?></td>
-                   <td><?php echo $value['item_code'];  ?></td>
-                   <td><?php echo $value['item_price'];  ?></td> 
-                   <td><?php echo $value['item_quantity'];  ?></td> 
-                   </tr>
-                 <?php  $i++;} ?>
-                       
-      </table>
-    
-    </div>
-    <div class="modal-footer">
-      <!--<h3>Modal Footer</h3>-->
-    </div>
-
-  </div>
-
-</div>
-</div>
  </div>
 
 
@@ -282,6 +290,10 @@
 
 
 <script>
+
+/*function getpoup(){
+
+ // alert();
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -292,14 +304,14 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
+//btn.onclick = function() {
     modal.style.display = "block";
 
     checkuncheck();
    
 
 
-}
+//}
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -312,15 +324,14 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+}
 
 
-
+*/
 
 
 //iterate through each textboxes and add the values
    
-
-document
 
 
 </script>
@@ -377,8 +388,59 @@ function checkuncheck(){
 
 
 
-
 //alert(productid);
 
 }
+
+
+
+function checkqty(){
+
+if($('#productname_0').val()==''){
+alert("please select Item");
+return false;
+}
+if(($('#paid_amount').val()=='' || $('#paid_amount').val()==0) && ($('#cr_blance1').val()=='' || $('#cr_blance1').val()==0)){
+
+//alert();
+  $('#paid_amount').focus();
+
+  return false;
+
+}
+
+
+$(".cqty").each(function () {
+
+         //add only if the value is number
+         //if (this.value !='NaN' && this.value.length != 0) {
+             $ids=this.id;
+            //  alert($ids);
+              var res = $ids.split('_');
+             var productname= $('#productname_'+res[1]).val();
+             if(productname!=''){
+                if(this.value ==""){
+                  //alert("Please enter qty");
+                 // break;
+                 $(this).focus();
+
+                 return false;
+                }
+
+             }
+
+            //  alert(this.id)
+           //  qty.push(this.value);
+       //  }
+
+
+   
+});
+
+
+//return false;
+
+}
+
+
 </script>

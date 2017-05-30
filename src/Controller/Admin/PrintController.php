@@ -65,6 +65,8 @@ public function printinvoice($id=null){
                       //  print_r($invoicerecord);
                         $this->set('invoice', $invoicerecord);
 
+                      //  return $this->redirect(['controller'=>'invoice','action' => 'addinvoice']);
+
                        // die;
             }
 }

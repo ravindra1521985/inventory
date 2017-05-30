@@ -62,13 +62,13 @@ header .topHeader {width: 100%; position:relative; padding:12px 0px; background:
 .logout a{ background: rgba(0, 0, 0, 0) url("../../img/Admin/logout.png") no-repeat scroll left center; padding-left: 20px;
     
 }
-.calbtn {  background: #f05f32 none repeat scroll 0 0;  color: #fff;  cursor: pointer;  padding: 3px 15px;  position: absolute;  right: 0;  text-align: center;  top:auto; z-index:99;}
+.calbtn {  background: #22bdbd none repeat scroll 0 0;  color: #fff;  cursor: pointer;  padding: 3px 15px;  position: absolute;  right: 0;  text-align: center;  top:auto; z-index:99;}
 .borderRight{border-right:1px solid #cacaca;}
 .borderRightWhite{border-right:1px solid #e3e3e3;}
 /*=====================nav=======================*/
 .navbar {  min-height: 40px;}
 .navbar-nav > li {  float: left;  width: auto;}
-.navbar-default {  background-color:#FE0000; border:none; margin-bottom:0px;  border-radius: 0;}
+.navbar-default {  background-color:#076359; border:none; margin-bottom:0px;  border-radius: 0;}
 .navbar-default .navbar-nav > li > a {  color: #fff; border-left: 1px solid #e3e3e3; padding:10px 30px; font-size:14px;}
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {  color: #fff;}
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {  background-color: #1480ec;  color: #fff;}
@@ -505,7 +505,7 @@ padding-left: 15px;
 
 
 
-.btn-c1{ background: #f05f32 !important; border-radius: 100px; color: #fff !important; border: 0; width:122px; font-size: 16px;}
+.btn-c1{ background: #18ad7d !important; border-radius: 100px; color: #fff !important; border: 0; width:122px; font-size: 16px;}
 
 .paging-summary{margin-bottom:6px;}
                             // for flash message
@@ -1505,7 +1505,7 @@ collapse; border-spacing: 0;
 }
 
 td, th {
-border: 1px solid  #DFDFDF !important; /* No more visible border */
+border: 1px solid  #DFDFDF; /* !important No more visible border */
 height: 30px;
 padding: 12px  !important;;
 transition: all 0.3s; /* Simple transition for hover effect */
@@ -1517,10 +1517,12 @@ font-weight: bold;
 }
 
 td {
-background: #FAFAFA !important;
+background: #FAFAFA ;
 text-align: center !important;
 }
 .mmp {
   height: 350px;
 }
+
+
 

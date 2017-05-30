@@ -5,6 +5,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Cache\Cache;
 use Cake\Datasource\ConnectionManager;
 use Cake\Mailer\Email;
+use Cake\Core\Exception\Exception;
 
 class CommonComponent extends Component
 {
@@ -74,6 +75,24 @@ class CommonComponent extends Component
 }
 	
 
+  public function getRecord($table,$conditio1,$condition2)
+    {
+      if($condition2=='' && $condition2==0)
+      {
+         return 0;
+      }
+        $datay = TableRegistry::get($table);
+        $queryy = $datay->find()        
+         ->where([$conditio1 => $condition2])
+         ->first();      
+     //foreach ($queryy as $roww)
+              //     {
+                   // $typelist = $roww->$field;
+                 // }
+               return $queryy;
+ 
+    }
+
 	
  public function getItemList()
     {
@@ -110,35 +129,38 @@ class CommonComponent extends Component
    {
 	    $email = new Email('default');
 		$email->from(['singh85.ravindra@gmail.com' => 'Inventory'])
-        ->to($to)
+        ->to("singh85.ravindra@gmail.com")
         ->subject($subject)
        // ->template('fail', 'default')
        ->emailFormat('html')
-        ->send($message);
+        ->send("test");
 	   
    }
     
-     public function sendEmail2($to=null,$message=null,$subject=null)
+     public function sendEmail2($to=null,$from=null,$message=null,$subject=null)
         {
-            $email = new Email('default');
-          $email->from(['singh85@gmail.com'=>'Inventory'])
+          //  $email = new Email('default');
+      //    $email->from(['singh85@gmail.com'=>'Inventory'])
+       //     ->to($to)
+      //      ->subject($subject)
+       //     ->template('fail', 'default')
+       //    ->emailFormat('html')
+      //      ->send($message);
+
+            try {
+
+          $email = new Email('default');
+          $email->template('all_mails','default')
+                ->emailFormat('html')
             ->to($to)
+            ->from([$from=>'inventory'])
             ->subject($subject)
-            ->template('fail', 'default')
-           ->emailFormat('html')
-            ->send($message);
-
-
-     /*   $email = new Email('production');
-        $email->template('all_mails','production')               
-            ->emailFormat('html')
-            ->to('singh85.ravindra@gmail.com')
-            ->from(['singh85.ravindra@gmail.com'=>'inventory'])
-            ->subject($subject)
-           // ->viewVars(['user_type'=>'aa','title'=>'aaa'])
-          //  ->send();
-       prd($email);*/
-
+            ->viewVars(['invoice'=>$message])        
+            ->send();
+      // prd($email);
+              } catch (Exception $e) {
+    //...
+              }
 
 
 
@@ -489,6 +511,88 @@ public function updateitem($data=null){
 
 }
 
+
+public function getdailypettyamount(){
+
+                 
+                      $itemtempTable      =      TableRegistry::get('pettylist');
+                      $query = $itemtempTable->find(); 
+                      $query
+                      ->select(['sum' => $query->func()->sum('pettylist.amount')])
+                       ->where(['date(created_date)' => date('Y-m-d'),'status'=>1])
+                       ->toArray();
+
+                        foreach($query as $key=>$value){
+                        $todaypettyamount= $value['sum'];
+  
+                          } 
+
+                          return $todaypettyamount;
+
+
+
+}
+
+
+public function gettotalpettyamount(){
+
+                 
+                     
+                  $itemtempTable1      =      TableRegistry::get('pettylist');
+                      $query1 = $itemtempTable1->find(); 
+                      $query1
+                      ->select(['sum' => $query1->func()->sum('pettylist.amount')])
+                       ->where(['status'=>1])
+                       ->toArray();
+
+                        foreach($query1 as $key1=>$value1){
+                        $todaypettyamount1= $value1['sum'];
+  
+                          }
+
+                          return $todaypettyamount1;
+
+
+
+}
+
+public function getdailyamountofcash(){
+
+            $itemtempTable      =      TableRegistry::get('invoice');
+                      $query = $itemtempTable->find(); 
+                      $query
+                      ->select(['sum' => $query->func()->sum('invoice.paid_amount')])
+                       ->where(['date(created_date)' => date('Y-m-d'),'status'=>1])
+                       ->toArray();
+
+                        foreach($query as $key=>$value){
+                        $todaypettyamount= $value['sum'];
+  
+                          } 
+
+                          return $todaypettyamount;
+
+
+}
+
+public function gettotalamountofcash(){
+
+            $itemtempTable      =      TableRegistry::get('invoice');
+                      $query = $itemtempTable->find(); 
+                      $query
+                      ->select(['sum' => $query->func()->sum('invoice.paid_amount')])
+                       ->where(['status'=>1])
+                       ->toArray();
+
+                        foreach($query as $key=>$value){
+                        $todaypettyamount= $value['sum'];
+  
+                          } 
+
+                          return $todaypettyamount;
+
+
+}
 
 
 

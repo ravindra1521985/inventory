@@ -5,48 +5,43 @@
       <div class="col-md-10 col-sm-9">
            
           <div class="block-1 block-2">
-            <h1 class="GreyBox width100per">Add Item </h1>
+            <h1 class="GreyBox width100per">Add Petty</h1>
                      
-            <?php  echo  $this->Form->create('',['controller'=>'items','action'=>'additem','id'=>'additem','class'=>'form-horizontal']);  ?>
+            <?php  echo  $this->Form->create('',['controller'=>'invoice','action'=>'addpetty','id'=>'addpetty','class'=>'form-horizontal']);  ?>
               <div class="row paddLeft10 paddright10 mt-10" style="border-top:2px solid #ccc;">
                   
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Item Name</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Name</label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('name', array('class'=>'form-control','maxlength'=>100,'placeholder'=>'Enter Item Name','id'=>'name','required')); ?>
+                      <?php echo $this->Form->text('name', array('class'=>'form-control','maxlength'=>100,'placeholder'=>'Enter Name','id'=>'name','required')); ?>
                        <?php echo $this->Form->error('name'); ?>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-md-6">
+               
+				   <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Item Code</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Reason</label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('item_code', array('class'=>'form-control','maxlength'=>100,'placeholder'=>'Enter Item Name','id'=>'item_code','required')); ?>
-                       <?php echo $this->Form->error('item_code'); ?>
+                      <?php echo $this->Form->text('reason', array('class'=>'form-control ','maxlength'=>200,'placeholder'=>'Enter reason','id'=>'reason','required','type'=>'text')); ?>
+                       <?php echo $this->Form->error('reason'); ?>
                     </div>
                   </div>
                 </div>
 				   <div class="col-md-6">
                   <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Item Price</label>
+                    <label for="inputEmail3" class="col-sm-3 control-label">Amount</label>
                     <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('item_price', array('class'=>'form-control number','maxlength'=>10,'placeholder'=>'Enter Item Price(like 100.9)','id'=>'item_price','required', 'value'=>0)); ?>
-                       <?php echo $this->Form->error('item_price'); ?>
+                      <?php echo $this->Form->text('amount', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter amount','id'=>'amount','required', 'value'=>0)); ?>
+                       <?php echo $this->Form->error('amount'); ?>
                     </div>
                   </div>
                 </div>
-				   <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Item Quantity</label>
-                    <div class="col-sm-9">                      
-                      <?php echo $this->Form->text('item_qty', array('class'=>'form-control number','maxlength'=>100,'placeholder'=>'Enter Item Quantity','id'=>'item_qty','required', 'value'=>0)); ?>
-                       <?php echo $this->Form->error('item_qty'); ?>
-                    </div>
-                  </div>
-                </div>
+
+               
+
                 
          <!--<div class="col-md-6">
                   <div class="form-group">
@@ -62,6 +57,8 @@
                   </div>
                 </div>-->
 
+                <br>
+                <br>
                 <br>
                
                   <div class="text-center mt-20 mb-10 mb-51" style="margin-right:-10%;padding-top:100px;">

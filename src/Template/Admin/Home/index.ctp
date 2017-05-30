@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <?php //echo $this->element(ADMIN.'left_navigation'); ?>  
-      <?php if($this->request->session()->read('Auth.User.group')==1 ) { ?> 
+      <?php if($this->request->session()->read('Auth.User.grouptype')==1 ) { ?> 
      <div class="col-sm-8 col-md-12" style="margin-left:150px;margin-right:50px;">       
         
 		<div class="col-sm-8 col-md-10">        

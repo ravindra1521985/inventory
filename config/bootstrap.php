@@ -270,6 +270,12 @@ Type::build('timestamp')
  * Debug Kit should not be installed on a production system
  */
 
+function gettax(){
+
+    $tax=array(18=>'18%');
+    return $tax;
+}
+
 function prd($arr)
 {
     pr($arr);

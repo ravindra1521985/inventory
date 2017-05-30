@@ -27,7 +27,7 @@
               <div  class="newbuttton">
               <a href="<?php echo SITEURL; ?>admin/customer/uploadcustomercsv">Upload</a>
               </div>-->
-               <div style="overflow:scroll;height:600px;width:100%;overflow:auto">
+               <div style="width:1250px;overflow:auto">
 						  <div  class="newbuttton">
 						  <a href="<?php echo SITEURL; ?>admin/invoice/addinvoice">Add New </a>
 						  </div>
@@ -57,7 +57,11 @@
                                   <th>Sr.no. <span><i class="fa fa-sort"></i></span> </th>
                                   <th>Invoice Id<span><i class="fa fa-sort"></i></span> </th>
                                   <th>Customer name(email)<span><i class="fa fa-sort"></i></span> </th>
-                								  <th>Total Amount<span><i class="fa fa-sort"></i></span></th>
+                								  <th>Sub Amount<span><i class="fa fa-sort"></i></span></th>
+                                   <th>tax Amount<span><i class="fa fa-sort"></i></span></th>
+                                  <!--  <th>tax Name<span><i class="fa fa-sort"></i></span></th>-->
+                                    <th>Total Amount(Width TAX)<span><i class="fa fa-sort"></i></span></th>
+                                    <th>Paid Amount<span><i class="fa fa-sort"></i></span></th>
                                    <th>Dr.Amount<span><i class="fa fa-sort"></i></span></th>
                 								  <th>Cr.Amount<span><i class="fa fa-sort"></i></span></th>                         
                                    <th>Created Date<span><i class="fa fa-sort"></i></span></th>
@@ -73,7 +77,12 @@
                    <td><?php echo $i;  ?></td>
                    <td><?php echo ucfirst($value['invoice_code']);  ?></td>
                    <td><?php echo $custlist[$value['customer_id']];  ?></td>
+
+           <td><?php echo $value['sub_total'];  ?></td> 
+           <td><?php echo $value['tax_amount'];  ?></td>       
+         <!--  <td><?php echo $value['tax'];  ?></td> -->
 				   <td><?php echo $value['total_amount'];  ?></td> 
+           <td><?php echo $value['paid_amount'];  ?></td> 
 				   <td><?php echo $value['dr_amount'];  ?></td> 
            <td><?php echo $value['cr_amount'];  ?></td> 
            <td><?php echo date('d-m-Y h:i:s',strtotime($value['created_date']));  ?></td> 
@@ -83,7 +92,7 @@
                       $delete_img = $this->Html->image('delete.png',array('alt'=>'delete','class'=>'','style'=>'width:16px;'));
 
             // echo $this->Html->link($edit_img, ['controller' => 'customer', 'action' => 'editcustomer',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?> &nbsp; &nbsp;  
-             <?php echo $this->Html->link( $delete_img, ['controller' => 'invoice', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'title'=>'delete')); ?>&nbsp; &nbsp;&nbsp; &nbsp;
+             <?php //echo $this->Html->link( $delete_img, ['controller' => 'invoice', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'title'=>'delete')); ?>
               <?php echo $this->Html->link($print, ['controller' => 'print', 'action' => 'printinvoice',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'target'=>'_blank','title'=>'print')); ?>
 			 
 			</td>

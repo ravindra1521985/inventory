@@ -52,30 +52,35 @@
 				
 			
                 <?php if($routing_prefix === 'admin' && $controller === 'items'){ $active='active1';}else { $active=''; } ?>
+
+                  <?php   if($this->request->session()->read('Auth.User.grouptype')==1) { ?>
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Item management</a>
                     <ul class="dropdown-menu">
-            <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
+            <?php   if($this->request->session()->read('Auth.User.grouptype')==1) { ?> 
 				   <li><a href="<?php echo $this->Url->build(array('controller'=>'items','action'=>'viewlist')); ?>"> Item List</a></li>
             
 				 <?php  } ?>		
                   </ul>
                 </li>
-
+                 <?php  } ?>
                 <?php if($routing_prefix === 'admin' && $controller === 'customer'){ $active='active1';}else { $active=''; } ?>
+                  <?php   if($this->request->session()->read('Auth.User.grouptype')==1) { ?>
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Customer management</a>
                     <ul class="dropdown-menu">
-            <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
+           
            <li><a href="<?php echo $this->Url->build(array('controller'=>'customer','action'=>'viewlist')); ?>"> Customer List</a></li>
-            
-         <?php  } ?>    
+         <li><a href="<?php echo $this->Url->build(array('controller'=>'customer','action'=>'viewuser')); ?>"> User List</a></li>
+                        
                   </ul>
                 </li>
-
+                <?php  } ?> 
                  <?php if($routing_prefix === 'admin' && $controller === 'invoice'){ $active='active1';}else { $active=''; } ?>
                 <li class="dropdown <?php echo $active; ?>" > <a href="<?php //echo $this->Url->build(array('controller'=>'ServiceSetting','action'=>'index')); ?>" class="dropdown-toggle" data-toggle="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Invoice management</a>
                     <ul class="dropdown-menu">
-            <?php   if($this->request->session()->read('Auth.User.group')==1) { ?> 
+            <?php   if($this->request->session()->read('Auth.User.grouptype')==1 || $this->request->session()->read('Auth.User.grouptype')==2) { ?> 
            <li><a href="<?php echo $this->Url->build(array('controller'=>'invoice','action'=>'viewlist')); ?>"> invoice List</a></li>
+
+            <li><a href="<?php echo $this->Url->build(array('controller'=>'invoice','action'=>'pettylist')); ?>">Petty Spent List </a></li>
             
          <?php  } ?>    
                   </ul>

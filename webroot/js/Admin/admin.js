@@ -1,6 +1,5 @@
 $(document).ready(function(){
      
-  
     //function to populate city on change of state
    
     
@@ -44,7 +43,7 @@ $("#search").on("keyup", function() {
 });
   */
   
-   $("#customer").select(function() {
+   $("#customer").blur(function() {
    		
         var val = $('#customer').val()
         var xyz = $('#customer1 option').filter(function() {
@@ -72,7 +71,7 @@ $("#search").on("keyup", function() {
                     //$('#cr_blance1').val(Jdata.cr_amount);
                      $('#dr_amount').val(Jdata.dr_amount);
                       //$('#blance_due').val(Jdata.dr_amount);
-                      $('#detail').val(Jdata.dr_amount);
+                      $('#detail').val(Jdata.detail);
 
                     $('#phone').attr('readonly', 'true');
                    $('#c_id').val(Jdata.id);
@@ -99,9 +98,18 @@ $("#search").on("keyup", function() {
      	 		 $('#phone').val('');
                    $('#c_id').val('');
                     $('#email').val('');
-                    $('#cr_amount').val('');
-                      $('#dr_amount').val('');
-                       $('#detail').val(Jdata.detail);
+                    $('#cr_amount').val(0);
+                      $('#dr_amount').val(0);
+                       $('#detail').val('');
+                    $('#phone').attr('readonly', false);
+                     $('#email').attr('readonly', false);
+                   // $('#cr_amount').val(Jdata.cr_amount);
+                     $('#cr_amount').attr('readonly', false);
+                     // $('#cr_blance1').attr('readonly', 'true');
+                     // $('#blance_due').attr('readonly', 'true');
+                      $('#dr_amount').attr('readonly', false);
+                      $('#detail').attr('readonly', false);
+
 
      }
 
@@ -143,7 +151,98 @@ $('#tdate').datepicker({
 
 
 
+
+
+
+  /*
+
+$("#search").on("keyup", function() {
+  
+
+  
+  var value = $(this).val();
+
+  alert(value);
+
+   // var patt = new RegExp(value, "i");
+
+   // alert(patt);
+   
+
+    $('#filter').find('tr').each(function() {
+
+      if (!($(this).find('td').text().search(value) >= 0)) {
+
+        $(this).not('.myHead').hide();
+
+      }
+
+      if (($(this).find('td').text().search(value) >= 0)) {
+
+        $(this).show();
+
+      }
+
+    });
+    
+  
+  
+  
+  
+});*/
+
+
+
+
+
+
    });
+
+
+function searchitemname(value){
+
+ var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("filter");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+       if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+
+
+}
+
+function searchcode(value){
+
+ var input, filter, table, tr, td, i;
+  input = document.getElementById("search1");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("filter");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+       if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+
+
+}
+
+
+
 
 
 /*function getitemlist(){
@@ -194,7 +293,20 @@ function calculateSum() {
 
      });
    
-   document.getElementById("totalamount").value=sum.toFixed(2);
+
+
+    document.getElementById("subtotal").value=sum.toFixed(2);
+
+    tax=document.getElementById("tax").value;
+    
+    var totaltax=(sum * parseFloat(tax))/100;
+
+    
+
+    var total=totaltax+parseFloat(sum);
+  // document.getElementById("totalamount").value=sum.toFixed(2);
+   document.getElementById("tax_amount").value=totaltax;
+  document.getElementById("totalamount").value=total;
    
  }
 
@@ -203,7 +315,23 @@ function calculateSum() {
 function calculateSum1() {
 
    
-   var total_amount=document.getElementById("totalamount").value;
+
+   var tax=document.getElementById("tax").value;
+
+  // alert(tax);
+   if(tax==''){
+    tax=0;    
+    document.getElementById("tax_amount").value=0;
+   }else{
+
+      document.getElementById("tax_amount").value = (parseFloat(tax)*parseFloat(document.getElementById("subtotal").value)/100);
+   }
+
+   var totaltaxamount=document.getElementById("tax_amount").value;
+
+   //var total_amount=document.getElementById("totalamount").value+parseFloat(totaltaxamount);
+   var total_amount=parseFloat(document.getElementById("subtotal").value) + parseFloat(totaltaxamount);
+   document.getElementById("totalamount").value=total_amount;
    var paid_amount=document.getElementById("paid_amount").value;
    if(paid_amount==''){
    	paid_amount=0;
@@ -219,17 +347,27 @@ function calculateSum1() {
    }
 
 
+    //alert(paid_amount);
+   // alert(creadetamount);
+   // alert(total_amount);
+   // alert(dr_amount);
+
+
 		if(parseFloat(paid_amount)+parseFloat(creadetamount) > parseFloat(total_amount)+parseFloat(dr_amount)){
 			alert("Please enter valid amount.");
 				document.getElementById("paid_amount").value=0;
 				document.getElementById("cr_blance1").value=0;
+        document.getElementById("blance_due").value=0;
 		}
 
 
    if(parseFloat(total_amount) >= (parseFloat(paid_amount)+parseFloat(creadetamount))-(parseFloat(dr_amount))){
 
    	var due_amount = parseFloat(total_amount)-(parseFloat(paid_amount)+parseFloat(creadetamount));
-   			document.getElementById("blance_due").value=parseFloat(due_amount)+(parseFloat(dr_amount));
+
+        var totaldueblance=parseFloat(due_amount)+(parseFloat(dr_amount));
+   			document.getElementById("blance_due").value=totaldueblance.toFixed(2);
+
    }
    
  }
@@ -242,21 +380,40 @@ function amoutcal(id)
   var res = id.split('_');
     var qty =document.getElementById("stockqty_"+res[1]).value;
 
+    if(qty==""){
+
+      qty=0;
+    }
+
+
     var stockvalue=document.getElementById("qty_"+res[1]).value;
 
+if(stockvalue==''){
+stockvalue=0;
+
+}
    
     if(parseFloat(qty) > parseFloat(stockvalue)){
       alert("Qunatity is more than stock");
+    //  alert();
       document.getElementById("stockqty_"+res[1]).value='';
+       document.getElementById("amount_"+res[1]).value='';
+        calculateSum();
       return false;
     }
         
-      var rate = document.getElementById("productrate_"+res[1]).value;
+
+     // var rate = parseFloat(document.getElementById("productrate_"+res[1]).value);
+
+         var rate = parseFloat(document.getElementById("mtrate_"+res[1]).value);
       
-      
+      totalamount=0;
       var totalamount = parseFloat(qty) * parseFloat(rate);
-      
-      //alert(totalamount);
+     // alert()
+      if(totalamount=='NaN'){
+       // alert(totalamount);
+       totalamount=0;
+     }
       
         document.getElementById("amount_"+res[1]).value=totalamount;
       
@@ -286,7 +443,7 @@ function addRow(tableID)
   var newCount=parseInt(rowCount)+parseInt(edit_cnt)-1;
   var newCount=parseInt(rowCount);
   var newcell = row.insertCell(i);
-  newcell.style.background='#fff';
+  newcell.style.background='#FAFAFA';
   //newcell.valign='top';
   //newcell.className='';
   /*$('.datepicker').removeClass('hasDatepicker').datepicker({ dateFormat: 'dd/mm/yy',changeMonth: true, changeYear: true,yearRange: '-80:+20'});*/
@@ -414,6 +571,51 @@ function deleteRowOrder(tableID)
   calculateSum()
 }
 
+
+
+function deleteRowOrder1(tableID,rowid) 
+{
+
+
+  try 
+  {
+  var table = document.getElementById(tableID);
+  //alert(table);
+  var rowCount = table.rows.length;
+ // alert(rowCount);
+  for(var i=0; i<rowCount; i++) 
+  {
+  var row = table.rows[i];
+ // var chkbox = row.cells[0].childNodes[0];
+ // if(null != chkbox && true == chkbox.checked) 
+  {
+  if(rowCount <= 1) 
+  {
+  alert("Cannot delete all the rows.");
+  break;
+  }
+
+ // alert(rowid);
+ // alert(i);
+  if(rowid-1==i){
+  table.deleteRow(i);
+  rowCount--;
+  i--;
+   break;
+  }
+
+
+  }
+  }
+  document.getElementById("hiditemcount").value=(rowCount);  }
+  catch(e) 
+  {
+ // alert(e);
+  }
+  calculateSum()
+}
+
+
 function getItemsList(id,code,shade,desc,qty,ctr)
 {  
   
@@ -445,13 +647,13 @@ function getItemsList(id,code,shade,desc,qty,ctr)
   {
      // alert(ctr);
      
-    var f=checkdulicate(id);
+    //var f=checkdulicate(id);
 
    // alert(f);
 
-      if(f==1){
+     /* if(f==1){
         return false;
-      }
+      }*/
             //alert("fdfs");
         if(ctr!=0)
         {
@@ -460,13 +662,113 @@ function getItemsList(id,code,shade,desc,qty,ctr)
         document.getElementById('product_'+counter).value = id;
         document.getElementById('productname_'+counter).value = code;
         document.getElementById('productcode_'+counter).value = shade;
-        document.getElementById('productrate_'+counter).value = desc;  
+        document.getElementById('productrate_'+counter).value = desc; 
+         document.getElementById('mtrate_'+counter).value = desc; 
          document.getElementById('qty_'+counter).value = qty;       
                   
            
-    
+   
     
   }
+  if(document.getElementById("row_id_"+ctr).checked==false)
+  {
+
+
+       if(ctr!=0)
+        {
+
+          $(".pid").each(function () {
+
+         //add only if the value is number
+         if (this.value !='NaN' && this.value.length != 0) {
+            
+            if(this.value==id){
+
+                $('#'+this.id).parents('tr').remove();
+
+               //deleteRowOrder1('dataTable',ctr);
+
+            }
+         }
+
+     });
+
+            //  alert('#product_'+counter);
+
+
+             // var result= $('#product_'+counter).parent().find('input[type="text"]').val();
+
+            // document.getElementById('product_'+counter).value = id;
+
+          //  alert(result);
+
+        
+            //  deleteRowOrder1('dataTable',ctr);
+   
+     
+          } 
+
+     // alert();
+  }
+
 
 //IF WE UNCHECK THE CHECK BOX FOR DESELECT ANY ITEM***********************END HERE******************************************
 }
+
+function checkuserid(){
+
+    //alert();
+    
+     var user_id = $('#user_id').val(); 
+    
+    //age
+    
+     $.ajax({
+                url:siteUrl+'ajax/checkuser',
+                type:"POST",
+                dataType: 'json',
+              data:{'user_id':user_id},
+                success: function(data){
+          //alert(data);
+                    var status=data.status;
+            //alert(status);
+                    if(status=='Success')
+                    { 
+        
+         // alert('User Id Is All Ready Exit');
+          $('#user_id').val(''); 
+          $('#user_id_error').text('User already exists');  
+          $('#user_id_error').css('display','block'); 
+              
+            }   
+              else{
+            
+             $('#user_id_error').css('display','none'); 
+           
+          }
+                   
+          },        
+          
+        });
+   }
+    
+    function validation(){
+
+
+      var password=$("#password").val();
+     var cpassword=$("#c_password").val();
+      if(password!='' && cpassword!=''){
+      if(password !== cpassword)
+        {
+
+            $("#pass_error").text('Password Mismatch');
+            $("#pass_error").css("display",'block');
+            return false;
+        }else{
+           $("#pass_error").css("display",'none');
+        }
+      }
+    
+
+    }
+    

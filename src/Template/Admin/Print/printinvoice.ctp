@@ -157,14 +157,32 @@ tr:hover .cut { opacity: 1; }
     </style>
 <?=$this->Html->script(FRONTEND.'jquery.min.js'.ASSET_VERSION);?>
 <script>
-    $(function(){
-    $("#print").click(function(){
-      //  $("#pb").hide();
-        $("#pb").toggle();
-        window.print();
+
+     window.onload = function () {
+    window.print();
+     window.history.back();
+}
+
+   /* $(function(){
+
+
+
+   // $("#print").click(function(){
+     //   $("#pb").hide();
+     //  $("#pb").toggle();
+      window.print();
+      window.close();
+      // url: siteUrl+"admin/invoice/addinvoice",
+
+
     });
-  
-});
+
+
+    $(document).ready(function(){
+       window.print();
+      window.close();
+   // $("#print").trigger('click'); 
+});*/
 </script>
 
   </head>
@@ -176,7 +194,7 @@ tr:hover .cut { opacity: 1; }
            //  echo "</pre>";onClick="window.print()"
             ?>
             <div id ="pb" style="float:right;">
-            <input type="button" value="Print" id="print">
+           <!-- <input type="button" value="Print" id="print">-->
             </div>
             <br>
             <br>
@@ -226,6 +244,7 @@ tr:hover .cut { opacity: 1; }
           <tr>
             <th><span contenteditable>Item Code</span></th>
             <th><span contenteditable>Name</span></th>
+            <!--<th><span contenteditable>Rate</span></th>-->
             <th><span contenteditable>Rate</span></th>
             <th><span contenteditable>Quantity</span></th>
             <th><span contenteditable>Amount</span></th>
@@ -246,7 +265,8 @@ tr:hover .cut { opacity: 1; }
 
           //  echo $this->Common->getfield('items','id',$value1['item_id'],'item_code'); ?></span></td>
             <td><span contenteditable><?php echo  $items->name; ?></span></td>
-             <td><span data-prefix>$</span><span contenteditable><?php echo $value1['item_price']; ?></span></td>
+            <!-- <td><span data-prefix>$</span><span contenteditable><?php echo $value1['item_price']; ?></span></td>-->
+              <td><span data-prefix>$</span><span contenteditable><?php echo $value1['bill_rate']; ?></span></td>
             <td><span contenteditable><?php echo $value1['quantity']; ?></span></td>
             <td><span data-prefix>$</span><span><?php echo $value1['item_amount']; ?></span></td>
           </tr>
@@ -255,7 +275,15 @@ tr:hover .cut { opacity: 1; }
       </table>
      
       <table class="balance">
+      <tr>
+          <th><span contenteditable>Amount</span></th>
+          <td><span data-prefix>$</span><span><?php echo $value['sub_total']; ?></span></td>
+        </tr>
         <tr>
+          <th><span contenteditable>Tax Amount</span></th>
+          <td><span data-prefix>$</span><span><?php echo $value['tax_amount']; ?></span></td>
+        </tr>
+         <tr>
           <th><span contenteditable>Total Amount</span></th>
           <td><span data-prefix>$</span><span><?php echo $value['total_amount']; ?></span></td>
         </tr>
