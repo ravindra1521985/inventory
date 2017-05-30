@@ -45,6 +45,9 @@ class InvoiceController extends AppController
     /* List of item*/
     public function viewlist()
     {       
+         
+
+    //  echo $this->Common->dailysummarysms();
       
         $this->loadModel('Invoice');
 
@@ -126,8 +129,7 @@ class InvoiceController extends AppController
     /* add customer */
     public function addinvoice(){
 
-         // $this->Common->sendEmail2('singh85.ravinddra@gmail.com','1','New Invoice');
-
+       
 
         $this->loadModel('Customer');
 
@@ -245,7 +247,6 @@ class InvoiceController extends AppController
                                 $this->Common->updatecustomer($data1);
                                 $this->Common->customerlog($data1,'invoice');
 
-
                                 $invoicerecord = $this->Invoice->find()
                               ->where(['id'=>$invid])
                               ->contain(['InvoiceDetail'])
@@ -253,9 +254,8 @@ class InvoiceController extends AppController
 
                                 $to=$this->request->session()->read('Auth.User.email');
 
-
-                            
-                               // $this->Common->sendEmail2($to,$this->request->data['email'],$invoicerecord,'New Invoice');
+                               // $this->Common->invoicesms($this->request->data['name'],$invid);
+                           //  $this->Common->sendEmail2($to,$this->request->data['email'],$invoicerecord,'New Invoice');
                               
                     }
                     else{
@@ -290,16 +290,6 @@ class InvoiceController extends AppController
 
 
 
-public function getitem(){
-
-       $this->layout = 'ajax';
-   // $this->set('itemlist',$this->Common->getitemrecord());
-      // echo "sdgfd";
-      //$this->render(false);
-   $this->viewBuilder()->layout('ajax');
-
-
-}
 
 public function delete($id=null){
             if(!empty($id)){
@@ -447,5 +437,7 @@ public function pettylist(){
 
             }
        }
+
+     
 
  }

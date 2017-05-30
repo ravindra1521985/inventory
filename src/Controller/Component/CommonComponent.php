@@ -577,7 +577,7 @@ public function getdailyamountofcash(){
 
 public function gettotalamountofcash(){
 
-            $itemtempTable      =      TableRegistry::get('invoice');
+                      $itemtempTable      =      TableRegistry::get('invoice');
                       $query = $itemtempTable->find(); 
                       $query
                       ->select(['sum' => $query->func()->sum('invoice.paid_amount')])
@@ -594,7 +594,45 @@ public function gettotalamountofcash(){
 
 }
 
+/*  sms for invoice ganrated time*/
+ public function invoicesms($partyname=null,$inv=null){
+
+                               $itemtempTable      =   TableRegistry::get('invoice');
+
+                                $invoicerecord = $itemtempTable->find()
+                              ->where(['id'=>$inv])
+                              ->contain(['InvoiceDetail'])
+                              ->toArray();
+
+                                $i=0;
 
 
+                                 //  prd($invoicerecord);
+                                $totalitem=count($invoicerecord[0]['invoice_detail']);
+                             //foreach($invoicerecord[0]['InvoiceDetail'] as $key=>$value){
+
+
+                             // $i++;
+                           // }
+
+                       $sms="INVNO.-#".$invoicerecord[0]['invoice_code']."<br>Name-".$partyname."<br>Item-".$totalitem."<br>Total Bill Amt-".$invoicerecord[0]['total_amount']."<br>Total Received Amt-".$invoicerecord[0]['paid_amount'];   
+
+                       return $sms;
+                            //  prd($sms);
+       }
+
+
+/* this function use to get daily total Cash collected and Petty cash Spent.*/
+  public function dailysummarysms(){
+
+      $tcash= $this->getdailyamountofcash();
+
+     $pcash= $this->getdailypettyamount();
+
+    $dailysms="Total Cash collected-".$tcash;
+    $dailysms.="<br>Petty cash Spen-".$pcash;
+
+    return  $dailysms;
+  }
 
 }
