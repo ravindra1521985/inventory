@@ -527,6 +527,8 @@ public function getdailypettyamount(){
   
                           } 
 
+                            //echo $todaypettyamount;
+
                           return $todaypettyamount;
 
 
@@ -633,6 +635,27 @@ public function gettotalamountofcash(){
     $dailysms.="<br>Petty cash Spen-".$pcash;
 
     return  $dailysms;
+  }
+
+  /* get monthly invoice of client * date('Y-m-d H:i:s', strtotime('-1 hour')*/
+
+  public function getmonthlyinvoiceofclient($id){
+
+             // echo date(now()-interval 30 day);
+         
+
+
+     $itemtempTable      =      TableRegistry::get('invoice');
+                      $query = $itemtempTable->find() 
+                      ->where(['date(created_date) >'=>date('Y-m-d', strtotime("-7 days")),'status'=>1,'customer_id'=>$id])
+                       ->contain(['InvoiceDetail'])
+                       ->toArray();
+
+
+                   
+
+                          return $query;
+
   }
 
 }

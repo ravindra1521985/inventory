@@ -71,5 +71,32 @@ public function printinvoice($id=null){
             }
 }
 
+public function printinvoicep($id=null){
+
+            $this->viewBuilder()->layout('print');
+             if(!empty($id)){
+                  $id=base64_decode($id);             
+                  $this->loadModel('Invoice');            
+                 // $invoice = $this->Invoice->get($id);      
+                //  $this->set('invoice', $invoice);
+
+                  // $this->loadModel('Customer');
+                  $this->set('itemlist',$this->Common->getitemrecord());
+                        $invoicerecord = $this->Invoice->find()
+                        ->where(['id'=>$id])
+                         ->contain(['InvoiceDetail'])
+                        ->All();
+
+                       // prd($invoicerecord);
+
+                      //  print_r($invoicerecord);
+                        $this->set('invoice', $invoicerecord);
+
+                      //  return $this->redirect(['controller'=>'invoice','action' => 'addinvoice']);
+
+                       // die;
+            }
+}
+
     
  }

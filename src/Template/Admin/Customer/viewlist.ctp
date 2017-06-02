@@ -64,12 +64,12 @@
           foreach($Customer as $key=>$value) { ?>
 					<div class="formrow22011">
 				   <tr>
-                   <td><?php echo $i;  ?></td>
-                   <td><?php echo ucfirst($value['name']);  ?></td>
-                   <td><?php echo $value['phone'];  ?></td>
-				   <td><?php echo $value['email'];  ?></td> 
+            <td><?php echo $i;  ?></td>
+            <td><?php echo ucfirst($value['name']);  ?></td>
+            <td><?php echo $value['phone'];  ?></td>
+				    <td><?php echo $value['email'];  ?></td> 
             <td><?php echo $value['cr_amount'];  ?></td>
-				   <td><?php echo $value['dr_amount'];  ?></td> 
+				    <td><?php echo $value['dr_amount'];  ?></td> 
            
                   <!-- <td><?php  if($value['status']=='1'){
 						echo "active";
@@ -80,14 +80,40 @@
              <td ><?php 
                           $edit_img = $this->Html->image('edit.png',array('alt'=>'edit','class'=>'','style'=>'width:16px;'));
                       $delete_img = $this->Html->image('delete.png',array('alt'=>'delete','class'=>'','style'=>'width:16px;'));
+                        $pdf = $this->Html->image('pdf.png',array('alt'=>'pdf','class'=>'','style'=>'width:20px;'));
 
-             echo $this->Html->link($edit_img, ['controller' => 'customer', 'action' => 'editcustomer',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?> &nbsp; &nbsp;  
+             echo $this->Html->link($edit_img, ['controller' => 'customer', 'action' => 'editcustomer',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?> &nbsp; &nbsp; 
+
+
+
              <?php echo $this->Html->link( $delete_img, ['controller' => 'customer', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?>
 			 
+         <?php echo $this->Html->link($pdf, ['controller' => 'customer', 'action' => 'invoicepdfbyclient',$value['id'] , '_full' => true],array('escape'=>false)); ?>
 			</td>
                   
 
                 </tr>
+
+  <?php //$invoicemonthly =  $this->Common->getmonthlyinvoiceofclient($value['id']); 
+     //  prd($invoicemonthly);
+
+  ?>
+
+
+               <!-- <tr>
+                <td colspan="7">
+                <table>
+                <tr><th>Invoice No.</th><th>T.amount</th><th>P.amount</th><th>cr.amount</th><th>Due amount</th><th>Date</th><th>Action</th></tr>
+                <?php //foreach($invoicemonthly ) { ?>
+                 <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+                 <?php  ?>
+                </table>
+                </td>
+                </tr>-->
+
+
+
 				</div>
 					<?php $i++; } ?>
                           

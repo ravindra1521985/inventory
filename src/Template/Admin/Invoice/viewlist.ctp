@@ -93,7 +93,11 @@
 
             // echo $this->Html->link($edit_img, ['controller' => 'customer', 'action' => 'editcustomer',base64_encode($value['id']) , '_full' => true],array('escape'=>false)); ?> &nbsp; &nbsp;  
              <?php //echo $this->Html->link( $delete_img, ['controller' => 'invoice', 'action' => 'delete',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'title'=>'delete')); ?>
-              <?php echo $this->Html->link($print, ['controller' => 'print', 'action' => 'printinvoice',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'target'=>'_blank','title'=>'print')); ?>
+              <?php 
+                    echo $this->Html->link('print', ['controller' => 'print', 'action' => 'printinvoicep',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'target'=>'_blank','title'=>'print')); 
+                    echo "&nbsp;";
+
+              echo $this->Html->link($print, ['controller' => 'print', 'action' => 'printinvoice',base64_encode($value['id']) , '_full' => true],array('escape'=>false,'target'=>'_blank','title'=>'print')); ?>
 			 
 			</td>
                   

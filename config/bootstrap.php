@@ -137,6 +137,23 @@ mb_internal_encoding(Configure::read('App.encoding'));
  */
 ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
 
+ini_set('session.cookie_lifetime', 0);
+//ini_set('session.referer_check', ''); 
+
+      //  $this->Session->write('rr', "1");
+
+
+use App\Error\AppError;
+
+$errorHandler = new AppError();
+$errorHandler->register();
+
+//prd($errorHandler);
+
+//print_r($errorHandler->toArray());
+     
+
+
 /*
  * Register application error and exception handlers.
  */

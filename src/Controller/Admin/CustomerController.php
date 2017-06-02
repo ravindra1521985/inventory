@@ -21,8 +21,7 @@ class CustomerController extends AppController
     { 
         parent::beforeFilter($event); 
         $this->Security->config('unlockedActions', []);
-        
-        $this->viewBuilder()->layout('admin');
+      
     }
    
     public function beforeRender(Event $event)
@@ -34,7 +33,8 @@ class CustomerController extends AppController
     public function index($request_type=null,$page=null)
     {
        
-	  
+	    
+        $this->viewBuilder()->layout('admin');
 	
 		
     }
@@ -44,6 +44,11 @@ class CustomerController extends AppController
 
 
     public function viewuser(){
+
+       // echo "sdfdfgd";
+       // die;
+
+        $this->viewBuilder()->layout('admin');
 
        $this->loadModel('Admin');
 
@@ -89,14 +94,16 @@ class CustomerController extends AppController
        );
                 
           $result = $this->paginate('Admin');
-    //prd($result);
-          $this->set('user',$result);
+   //prd($result);
+          $this->set('userrecord',$result);
 
 
     }
 
     public function edituser($id=null){
 
+
+        $this->viewBuilder()->layout('admin');
           if(!empty($id)){
                   $id=base64_decode($id);             
                   $this->loadModel('Admin');            
@@ -148,6 +155,8 @@ class CustomerController extends AppController
     public function adduser(){
 
 
+
+        $this->viewBuilder()->layout('admin');
          $this->loadModel('Admin');
       
         if ($this->request->is('post')) { 
@@ -201,7 +210,8 @@ class CustomerController extends AppController
     /* List of item*/
     public function viewlist()
     {       
-      
+        
+        $this->viewBuilder()->layout('admin');
         $this->loadModel('Customer');
 
         if($this->request->is('post'))
@@ -256,6 +266,7 @@ class CustomerController extends AppController
     /* add customer */
     public function addcustomer(){
 
+        $this->viewBuilder()->layout('admin');
         $this->loadModel('Customer');
         $customer=$this->Customer->find()->last();
 
@@ -292,6 +303,8 @@ class CustomerController extends AppController
         public function editcustomer($id=null){
 
                 //echo $id;
+            
+        $this->viewBuilder()->layout('admin');
             if(!empty($id)){
                   $id=base64_decode($id);             
                   $this->loadModel('Customer');            
@@ -346,7 +359,8 @@ public function delete($id=null){
 
 public function uploadcustomercsv(){
 
-
+  
+        $this->viewBuilder()->layout('admin');
 if($this->request->is('post')) {
 
 
@@ -476,6 +490,20 @@ public function downloadexcel(){
     
 } 
 
+public function invoicepdfbyclient($id=null){
+
+        //  echo  "sff";
+        //  die;
+
+       // $invoice=  $this->Common->getmonthlyinvoiceofclient($id);
+
+      //  prd($invoice);
+           $this->set('invoice',$this->Common->getmonthlyinvoiceofclient($id));
+
+        $this->layout = 'pdf'; //this will use the pdf.ctp layout
+                $this->render();
+
+}
 
 
     

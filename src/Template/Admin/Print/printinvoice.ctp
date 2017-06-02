@@ -253,6 +253,8 @@ tr:hover .cut { opacity: 1; }
         <tbody>
 
           <?php  
+
+             
           foreach($value['invoice_detail'] as $key1=>$value1){  ?>
           <tr>
             <td><span contenteditable><?php

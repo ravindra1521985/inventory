@@ -146,5 +146,63 @@ public function getdetail($string=null)
        return $query;
     }
 
+    /*this function use to date bise sum of amount*/
+
+    public function datewisetotalamount($date=null,$tablename=null,$col=null){
+
+
+
+
+
+                      $itemtempTable      =      TableRegistry::get($tablename);
+                      $query = $itemtempTable->find(); 
+                      $query
+                      ->select(['sum' => $query->func()->sum($col)])
+                       ->where(['date(created_date)' => $date,'status'=>1])
+                       ->toArray();
+
+                        foreach($query as $key=>$value){
+                         $todaypettyamount = $value['sum'];
+  
+                          } 
+
+                          return $todaypettyamount;
+
+    }
+
+
+// get date wise record
+ public function getdatewiserecord($date=null,$tablename=null){
+
+
+
+
+      $item = TableRegistry::get($tablename);
+         $query = $item->find()
+            ->where(['date(created_date)' => $date,'status'=>1])
+            ->order(['id'=>'desc'])
+            ->toArray();
+
+                      
+
+                  return $query;
+
+    }
+
+     public function getmonthlyinvoiceofclient($id){
+
+             // echo date(now()-interval 30 day);
+         
+
+
+          $itemtempTable     =      TableRegistry::get('invoice');
+                      $query = $itemtempTable->find() 
+                      ->where(['date(created_date) >'=>date('Y-m-d', strtotime("-30 days")),'status'=>1])
+                       ->toArray();
+                  
+
+                          return $query;
+
+  }
  
 }

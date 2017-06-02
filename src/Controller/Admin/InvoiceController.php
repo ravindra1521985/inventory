@@ -8,6 +8,8 @@ use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
 use Cake\Datasource\ConnectionManager;
 use Cake\Controller\Component\FlashComponent;
+use Cake\Network\Exception\NotFoundException;
+
 
 
 class InvoiceController extends AppController
@@ -15,6 +17,8 @@ class InvoiceController extends AppController
        
    public function initialize()
     {
+          //$this->name;
+            //echo $this->error;      
         parent::initialize();
       $this->loadComponent('Common');
        
@@ -47,7 +51,7 @@ class InvoiceController extends AppController
     {       
          
 
-    //  echo $this->Common->dailysummarysms();
+  // echo $this->Common->getmonthlyinvoiceofclient(69);
       
         $this->loadModel('Invoice');
 
@@ -330,23 +334,28 @@ public function pettylist(){
   if($this->request->is('post'))
         {
 
-            if(isset($this->request->data['search']) && !empty($this->request->data['search']))
+            if(isset($this->request->data['fromdate']) && !empty($this->request->data['fromdate']))
                 {
                    
-                  $search = explode(",",$this->request->data['search']);
+                 // $search = explode(",",$this->request->data['search']);
 
                 //  print_r($search);
                 //  die;
 
-                    if(isset($search[0]) && !empty($search[0])){
-                     $conditions['name LIKE ']='%'.$search[0].'%';
-                    }
-                     if(isset($search[1]) && !empty($search[1])){
-                     $conditions['reason =']=$search[1];
-                    }
-                     if(isset($search[2]) && !empty($search[2])){
-                     $conditions['amount =']=$search[2];
-                    }
+               //   print_r($this->request->data['search']);
+
+               if(isset($this->request->data['fromdate']) && !empty($this->request->data['fromdate']))
+                {
+
+                    $formdate=date('Y-m-d', strtotime($this->request->data['fromdate']));
+                    $conditions['date(created_date) >=']=$formdate;
+                }
+                if(isset($this->request->data['todate']) && !empty($this->request->data['todate']))
+                {
+
+                    $todate=date('Y-m-d', strtotime($this->request->data['todate']));
+                    $conditions['date(created_date) <=']=$todate;
+                }
                    
                    
 
@@ -357,13 +366,14 @@ public function pettylist(){
 
         }
 
-        //print_r($conditions);
+      // print_r($conditions);
       
         $this->paginate = array(
            'limit' => 10,
-             'conditions' => array('status'=>'1',$conditions),
+            'conditions' => array($conditions,'status'=>'1'),
           //  'contain' => ['Stock','ItemPrice'],
            'order'=>array('id'=>'DESC'),
+           'group'=>array('date(created_date)'),
        );
                 
     $result = $this->paginate('Pettylist');

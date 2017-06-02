@@ -149,6 +149,8 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+
+
      
 		
 		date_default_timezone_set("Asia/Kolkata"); 
@@ -156,7 +158,17 @@ class AppController extends Controller
 		
 		  if(isset($this->request->params['prefix']) && ($this->request->params['prefix'] == 'admin'))
         {
-			
+
+            // print_r($this->request->session()->read());
+
+            // print_r($_SESSION);
+             // echo $sessionid=  $this->request->session()->id();
+             //  $this->request->session->start();
+                //  session_start();
+            //   echo  $this->request->session()->id();
+
+             //  pr($this->request->session());
+
            // $this->viewBuilder()->layout('admin');
         }
         else
@@ -170,22 +182,49 @@ class AppController extends Controller
       if($this->request->session()->read('Auth.User.id'))
             {
           
-        if( $this->request->session()->read('User.AllowedActions') && $this->request->session()->read('Auth.User.id') > 1)
+
+
+                  print_r($this->cakeError);
+          
+           //    $controller=$this->request->params['controller'];
+           //  echo   $action        =$this->request->params['action'];
+         //  die;
+            //  $cont=array('Users','Invoice','Customer','Items','Home');
+
+
+             // if(!in_array($controller, $cont))
+                       {                 
+                   // $this->viewBuilder()->layout('');
+                  //  $this->redirect(['controller'=>'users','action'=>'logout']);
+                  }
+
+
+      /*  if($this->request->session()->read('User.AllowedActions') && $this->request->session()->read('Auth.User.id') > 1)
            {  
+
              
-            $prefixx=$this->request->params['prefix'];
+             $prefixx=$this->request->params['prefix'];
+
             $controller=$this->request->params['controller'];
             
-            $tt=$this->request->session()->read('User.AllowedActions');
+            //$tt=$this->request->session()->read('User.AllowedActions');
+
+             $tt=array('index','viewlist');
+
+
+
+
+          //  print_r($tt);
             if($prefixx=='admin')
             {
+              
                if(!in_array($controller, $tt))
                        {                 
                    $this->viewBuilder()->layout('');
                   $this->redirect(['controller'=>'users','action'=>'notallowed']);
                }
             }
-		   }
+		   }*/
 			}
 		
 		
@@ -195,6 +234,9 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }*/
     }
+
+
+
 	 public function isAuthorized($user = null)
     { 
 

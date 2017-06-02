@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
 
-     <?php  echo $this->element(Admin.'/session_flash_b'); ?>
+     <?php
+          //  prd($userrecord);
+
+       echo $this->element(Admin.'/session_flash_b'); ?>
       
       <div class="col-xs-12 col-sm-9 col-md-10 wholebody" style="margin-left:50px;margin-right:50px;">       
         
@@ -62,7 +65,7 @@
                               <tbody>
 					<?php 
               $i=1;
-          foreach($user as $key=>$value) { ?>
+          foreach($userrecord as $key=>$value) { ?>
 					<div class="formrow22011">
 				   <tr>
                    <td><?php echo $i;  ?></td>
